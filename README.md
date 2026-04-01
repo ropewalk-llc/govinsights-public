@@ -31,4 +31,4 @@ Then open http://localhost:8080
 
 ## Contact
 
-Prepared by Ropewalk Technologies LLC. Contact: kim@ropewalk.io
+Prepared by Ropewalk Technologies LLC. Contact: contact us via the contact form

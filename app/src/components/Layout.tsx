@@ -20,6 +20,9 @@ export default function Layout({ children }: LayoutProps) {
             <Link to="/chowan/school-debt-timeline" className="hover:text-blue-200 transition-colors">
               Chowan County
             </Link>
+            <Link to="/contact" className="hover:text-blue-200 transition-colors">
+              Contact
+            </Link>
           </div>
         </div>
       </nav>
@@ -34,7 +37,7 @@ export default function Layout({ children }: LayoutProps) {
             GovInsights is a project of <strong>Ropewalk Technologies LLC</strong>
           </p>
           <p className="text-sm text-slate-500 mt-1">
-            Contact: <a href="mailto:kim@ropewalk.io" className="text-blue-700 hover:text-blue-900 underline">kim@ropewalk.io</a>
+            <Link to="/contact" className="text-blue-700 hover:text-blue-900 underline">Contact us</Link>
           </p>
           <p className="text-xs text-slate-400 mt-3">
             All data sourced from government records.

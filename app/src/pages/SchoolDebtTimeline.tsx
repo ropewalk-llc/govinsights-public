@@ -583,10 +583,10 @@ export default function SchoolDebtTimeline() {
         <p className="text-xs text-slate-500 leading-relaxed mb-2">
           All data sourced from official Chowan County Board of Commissioner meeting minutes, Chowan
           County GIS, U.S. Census Bureau, NC Department of Revenue, and NC General Statutes. Full
-          documentation available at request. Contact:{' '}
-          <a href="mailto:kim@ropewalk.io" className="text-blue-600 hover:text-blue-800 underline">
-            kim@ropewalk.io
-          </a>
+          documentation available at request.{' '}
+          <a href="/contact" className="text-blue-600 hover:text-blue-800 underline">
+            Contact us
+          </a>.
         </p>
         <p className="text-xs text-slate-500 leading-relaxed mb-2">
           If any information in this document is incorrect, it will be corrected promptly upon
@@ -597,9 +597,9 @@ export default function SchoolDebtTimeline() {
           All factual claims are sourced to government records.
         </p>
         <p className="text-xs text-slate-600 font-medium">
-          Prepared by Ropewalk Technologies LLC. Contact:{' '}
-          <a href="mailto:kim@ropewalk.io" className="text-blue-600 hover:text-blue-800 underline">
-            kim@ropewalk.io
+          Prepared by Ropewalk Technologies LLC.{' '}
+          <a href="/contact" className="text-blue-600 hover:text-blue-800 underline">
+            Contact us
           </a>
         </p>
       </footer>
