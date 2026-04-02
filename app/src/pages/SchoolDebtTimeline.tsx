@@ -1,18 +1,106 @@
+import { useRef } from 'react'
 import ResponsiveTable from '../components/ResponsiveTable'
 import Quote from '../components/Quote'
 import EditorialNote from '../components/EditorialNote'
 
+/* ------------------------------------------------------------------ */
+/*  Visual Timeline Component                                          */
+/* ------------------------------------------------------------------ */
+
+interface TimelineEvent {
+  date: string
+  title: string
+  color: 'blue' | 'amber' | 'red'
+}
+
+const timelineEvents: TimelineEvent[] = [
+  { date: 'Nov 2018', title: 'Voters reject bond', color: 'red' },
+  { date: 'May 2020', title: 'COVID cancels 2nd referendum', color: 'blue' },
+  { date: 'Aug 2020', title: 'Ott says no referendum needed for USDA', color: 'red' },
+  { date: 'Apr 2021', title: '$50M project approved 7-0', color: 'amber' },
+  { date: 'Sep 2021', title: 'Kahn/LS3P approved (no RFP)', color: 'amber' },
+  { date: 'Jun 2022', title: 'Project expands to $75M', color: 'red' },
+  { date: 'Jun 2022', title: 'Rate set above RNR, $1.15M from fund balance', color: 'amber' },
+  { date: 'Aug 2022', title: 'Reappraisal cycle shortened to 4 years', color: 'amber' },
+  { date: 'Feb 2023', title: 'Vincent Valuations $947K', color: 'amber' },
+  { date: 'Sep 2023', title: 'Kirby discloses brother\'s subcontract, $82.4M GMP approved', color: 'red' },
+  { date: 'Nov 2023', title: 'PNC financing at 9% floor', color: 'red' },
+  { date: 'Sep 2025', title: 'Reappraisal presented, 15-161% increases', color: 'red' },
+  { date: 'Jan 2026', title: 'Reappraisal takes effect, 38-42% county-wide', color: 'red' },
+]
+
+const colorMap = {
+  blue: { dot: 'bg-blue-500', ring: 'ring-blue-200', label: 'bg-blue-50 text-blue-800 border-blue-200' },
+  amber: { dot: 'bg-amber-500', ring: 'ring-amber-200', label: 'bg-amber-50 text-amber-800 border-amber-200' },
+  red: { dot: 'bg-red-500', ring: 'ring-red-200', label: 'bg-red-50 text-red-800 border-red-200' },
+}
+
+function VisualTimeline() {
+  return (
+    <div className="my-6">
+      {/* Legend */}
+      <div className="flex flex-wrap gap-4 mb-6 text-xs">
+        <span className="flex items-center gap-1.5">
+          <span className="inline-block w-3 h-3 rounded-full bg-blue-500" /> Procedural
+        </span>
+        <span className="flex items-center gap-1.5">
+          <span className="inline-block w-3 h-3 rounded-full bg-amber-500" /> Financial
+        </span>
+        <span className="flex items-center gap-1.5">
+          <span className="inline-block w-3 h-3 rounded-full bg-red-500" /> Escalation
+        </span>
+      </div>
+
+      {/* Vertical timeline */}
+      <div className="relative pl-6 border-l-2 border-slate-300 space-y-6">
+        {timelineEvents.map((evt, idx) => {
+          const c = colorMap[evt.color]
+          return (
+            <div key={idx} className="relative">
+              {/* Dot on the line */}
+              <span
+                className={`absolute -left-[calc(0.75rem+1px)] top-1 w-4 h-4 rounded-full ${c.dot} ring-4 ${c.ring}`}
+              />
+              <div className="ml-4">
+                <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
+                  {evt.date}
+                </span>
+                <p className={`mt-0.5 text-sm font-medium border rounded px-2 py-1 inline-block ${c.label}`}>
+                  {evt.title}
+                </p>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Main Page                                                          */
+/* ------------------------------------------------------------------ */
+
 export default function SchoolDebtTimeline() {
+  const timelineRef = useRef<HTMLElement>(null)
+  const pivotRef = useRef<HTMLElement>(null)
+  const detailRef = useRef<HTMLElement>(null)
+  const feeRef = useRef<HTMLElement>(null)
+  const taxRef = useRef<HTMLElement>(null)
+  const actionRef = useRef<HTMLElement>(null)
+
   return (
     <article className="max-w-3xl mx-auto px-4 py-8 md:py-12">
-      {/* Header */}
+      {/* ============================================================ */}
+      {/* HEADER                                                        */}
+      {/* ============================================================ */}
       <header className="mb-10">
         <h1 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight mb-4">
           The School Debt Timeline: How Chowan County Built an $85 Million School After Voters Said No
         </h1>
         <p className="text-slate-600 leading-relaxed mb-2">
-          A verbatim record compiled from official Chowan County Board of Commissioner meeting
-          minutes. All minutes are publicly available at{' '}
+          An analysis of public minutes and documents from the Chowan County Board of Commissioners.
+          All minutes are publicly available at{' '}
           <a
             href="https://www.chowancounty-nc.gov"
             target="_blank"
@@ -27,164 +115,227 @@ export default function SchoolDebtTimeline() {
         </p>
       </header>
 
-      {/* Who's Who */}
-      <section className="mb-10">
+      {/* ============================================================ */}
+      {/* A. EXECUTIVE SUMMARY                                          */}
+      {/* ============================================================ */}
+      <section className="mb-10 print:break-before-page">
         <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
-          Who's Who
+          Executive Summary
         </h2>
-        <ResponsiveTable
-          headers={['Name', 'Role', 'Relevance']}
-          rows={[
-            [<strong>Patti Kersey</strong>, 'Chair, Chowan County BOC (2019-2020)', 'Presided over referendum cancellation and early USDA discussions'],
-            [<strong>Bob Kirby</strong>, 'Commissioner (2019-2020), then Chair (2021-present); Secretary of ECP (2024 IRS filing)', 'Asked if referendum was needed; linked revaluation to debt capacity'],
-            [<strong>Kevin Howard</strong>, 'Chowan County Manager', 'Proposed budgets; advised about fund balance use; stated debt ratio would be "addressed at the revaluation"'],
-            [<strong>Rick Ott</strong>, 'Construction Manager, M.B. Kahn', 'Told the Board no referendum was needed for USDA (this guidance came from the project\'s own contractor)'],
-            [<strong>Ron Cummings</strong>, 'Commissioner', 'Raised concern about fixed-income residents being "priced out of their homes"'],
-            [<strong>Larry McLaughlin</strong>, 'Commissioner', 'Objected that the 2019 bond process "seems rushed"'],
-            [<strong>Commissioner Kehayes</strong>, 'Commissioner', 'Raised concern about debt-to-assessed-value ratio'],
-            [<strong>Chris Hill</strong>, 'Chowan County Tax Administrator', 'Presented reappraisal data'],
-            [<strong>Ryan Vincent</strong>, 'Owner, Vincent Valuations', 'Conducted 2022 and 2026 reappraisals'],
-            [<strong>Radke</strong>, 'Former Tax Administrator', 'Presented the resolution to shorten reappraisal cycle'],
-            [<><strong>Davenport</strong> &amp; <strong>Associates</strong></>, 'County\'s financial advisor', 'Modeled school debt; projected "no impact on current tax rate" for $50M project'],
-            [<strong>Cathy Smith</strong>, 'Chowan County Finance Officer', 'Presented budget and financial data'],
-          ]}
-        />
+
+        <div className="bg-slate-50 border border-slate-200 rounded-lg p-5 space-y-4 text-slate-700 leading-relaxed">
+          <p>
+            In November 2018, Chowan County voters rejected a bond referendum for a new John A. Holmes
+            High School. Under the North Carolina Constitution, general obligation bonds require voter
+            approval, and the voters said no. Rather than accept that result, the Board of Commissioners
+            pursued an alternative: USDA installment financing under G.S. 160A-20, which does not require
+            a referendum. The guidance that no referendum was needed came not from the county attorney or
+            the Local Government Commission, but from Rick Ott of M.B. Kahn Construction, the private
+            contractor that was subsequently hired to build the school.
+          </p>
+
+          <p>
+            The project, originally scoped at $50 million with a Davenport &amp; Associates projection
+            of "no impact on current tax rate," escalated to approximately $85 million. M.B. Kahn's
+            Construction Manager at Risk (CMAR) fee was set at 3.5% of construction cost, originally
+            scoped on a $40 million base ($1.4 million). As costs grew, the fee grew with it. Chair
+            Kirby confronted Kahn on record about the fee increase; Kahn's representative responded that
+            the original commitment referred to the percentage, not the dollar amount. LS3P's architect
+            fee was 5.75% of construction cost. Neither firm was selected through a competitive RFP process.
+          </p>
+
+          <p>
+            Since the project was approved, the county has never adopted a revenue-neutral tax rate
+            after a reappraisal. The Board adopted 4.7% above revenue-neutral in 2022 and raised the
+            rate again in 2024. In 2022, the Board also shortened the reappraisal cycle from 8 years to
+            4 years, accelerating tax base growth in a rising market. The 2026 reappraisal, which took
+            effect January 1, 2026, increased property values county-wide by an estimated 38-42%, with
+            individual increases ranging from 15% to 161%.
+          </p>
+
+          <p>
+            Based on the Board's documented pattern of setting rates above revenue-neutral, homeowners
+            can expect a cumulative tax increase of approximately 18-30% since FY2021-22. All claims in
+            this report are sourced to Board of Commissioner meeting minutes, deeds, NC Secretary of
+            State filings, IRS Form 990s, and other public records. No claim is based on anonymous
+            sources or speculation.
+          </p>
+        </div>
       </section>
 
-      {/* 2018 */}
-      <section className="mb-10">
+      {/* ============================================================ */}
+      {/* B. VISUAL TIMELINE                                            */}
+      {/* ============================================================ */}
+      <section ref={timelineRef} className="mb-10 print:break-before-page">
         <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
-          2018 — Voters Reject the School Bond
+          Timeline of Key Events
         </h2>
-        <p className="text-slate-700 leading-relaxed">
-          <strong>November 2018</strong> — Chowan County voters reject a bond referendum for a new
-          John A. Holmes High School. Under the NC Constitution (Art. V, Sec. 4), general obligation
-          bonds require voter approval. The voters said no.
+        <p className="text-slate-600 text-sm mb-4">
+          A chronological overview of the decisions that shaped the school project and its fiscal impact.
         </p>
+        <VisualTimeline />
       </section>
 
-      {/* 2019 */}
-      <section className="mb-10">
+      {/* ============================================================ */}
+      {/* C. THE AUGUST 26, 2020 MEETING (FEATURED)                     */}
+      {/* ============================================================ */}
+      <section ref={pivotRef} className="mb-10 print:break-before-page">
         <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
-          2019 — The County Prepares to Try Again
+          The August 26, 2020 Meeting
         </h2>
-        <p className="text-slate-700 leading-relaxed">
-          <strong>November 18, 2019</strong> — Board approves Davenport &amp; Company (up to $30,000)
-          and Parker Poe (~$20,000) to prepare for a 2020 bond referendum. Commissioner McLaughlin
-          objects that the process "seems rushed."
-        </p>
-      </section>
-
-      {/* 2020 */}
-      <section className="mb-10">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
-          2020 — COVID Stops the Second Referendum, a New Path Emerges
-        </h2>
-
         <p className="text-slate-700 leading-relaxed mb-4">
-          <strong>May 4-18, 2020</strong> — Board abandons 2020 bond referendum due to COVID-19.
+          This is the meeting where the path shifted from voter-approved bonds to installment
+          financing that required no referendum.
         </p>
 
-        <Quote
-          text="due to the impact of COVID 19, we would no longer pursue a bond referendum for 2020."
-          speaker="Chair Kersey"
-          source=""
-        />
+        <div className="bg-slate-700 text-slate-100 rounded-lg p-6 mb-6">
+          <h3 className="text-lg font-semibold text-white mb-2">The Pivot Meeting</h3>
+          <p className="text-slate-300 text-sm leading-relaxed mb-4">
+            Special meeting, August 26, 2020. Mr. Ott (M.B. Kahn), architect Paul Boney, County
+            Manager Howard, and Superintendent Dr. Sasscer present school construction plans. All
+            seven commissioners present.
+          </p>
 
-        <p className="text-slate-700 leading-relaxed mb-4">
-          <strong>August 26, 2020</strong> — Special meeting. Mr. Ott (M.B. Kahn), architect Paul
-          Boney, County Manager Howard, and Superintendent Dr. Sasscer present school construction
-          plans. All seven commissioners present.
-        </p>
+          <div className="space-y-4">
+            <div>
+              <p className="text-slate-300 text-sm mb-1">
+                <strong className="text-white">Mr. Ott highlights the risk of the bond referendum path, using Camden County as an example:</strong>
+              </p>
+              <blockquote className="border-l-4 border-blue-400 bg-slate-600 rounded-r-lg px-4 py-3">
+                <p className="text-slate-100 italic text-sm leading-relaxed">
+                  "He noted that if their bond referendum does not pass, Camden County will have to return those monies to the State."
+                </p>
+                <footer className="mt-1 text-xs text-slate-400">
+                  <span className="font-medium text-slate-300">Mr. Ott</span>{' '}
+                  (August_26_Minutes.pdf, line 88)
+                </footer>
+              </blockquote>
+              <p className="text-xs text-slate-400 mt-1">
+                Context: Ott was illustrating that the bond referendum path carried risk of voter
+                rejection (as Chowan had already experienced in 2018). This framed USDA installment
+                financing (which requires no voter approval) as the safer alternative.
+              </p>
+            </div>
 
-        <h3 className="text-xl font-semibold text-slate-800 mt-8 mb-4">Key Verbatim Exchanges</h3>
+            <div>
+              <p className="text-slate-300 text-sm mb-1">
+                <strong className="text-white">Architect Boney ties timeline to referendum:</strong>
+              </p>
+              <blockquote className="border-l-4 border-blue-400 bg-slate-600 rounded-r-lg px-4 py-3">
+                <p className="text-slate-100 italic text-sm leading-relaxed">
+                  "He stated this pushes the Board more closely to the date they are looking for (closer to the bond referendum)."
+                </p>
+                <footer className="mt-1 text-xs text-slate-400">
+                  <span className="font-medium text-slate-300">Architect Boney</span>{' '}
+                  (August_26_Minutes.pdf, line 190)
+                </footer>
+              </blockquote>
+            </div>
 
-        <p className="text-slate-700 leading-relaxed mb-2">
-          <strong>Mr. Ott highlights the risk of the bond referendum path, using Camden County as an example:</strong>
-        </p>
-        <Quote
-          text="He noted that if their bond referendum does not pass, Camden County will have to return those monies to the State."
-          speaker="Mr. Ott"
-          source="August_26_Minutes.pdf, line 88"
-        />
-        <p className="text-xs text-slate-500 -mt-2 mb-4">
-          Context: Ott was illustrating that the bond referendum path carried risk of voter rejection
-          (as Chowan had already experienced in 2018). This framed USDA installment financing (which
-          requires no voter approval) as the safer alternative.
-        </p>
+            <div>
+              <p className="text-slate-300 text-sm mb-1">
+                <strong className="text-white">Dr. Sasscer confirms referendum timeline:</strong>
+              </p>
+              <blockquote className="border-l-4 border-blue-400 bg-slate-600 rounded-r-lg px-4 py-3">
+                <p className="text-slate-100 italic text-sm leading-relaxed">
+                  "He stated that the bond referendum is scheduled for November of 2022."
+                </p>
+                <footer className="mt-1 text-xs text-slate-400">
+                  <span className="font-medium text-slate-300">Dr. Sasscer</span>{' '}
+                  (August_26_Minutes.pdf, lines 196-197)
+                </footer>
+              </blockquote>
+            </div>
 
-        <p className="text-slate-700 leading-relaxed mb-2">
-          <strong>Architect Boney ties timeline to referendum:</strong>
-        </p>
-        <Quote
-          text="He stated this pushes the Board more closely to the date they are looking for (closer to the bond referendum)."
-          speaker="Architect Boney"
-          source="August_26_Minutes.pdf, line 190"
-        />
+            <div>
+              <p className="text-slate-300 text-sm mb-1">
+                <strong className="text-white">Mr. Ott presents USDA as alternative:</strong>
+              </p>
+              <blockquote className="border-l-4 border-blue-400 bg-slate-600 rounded-r-lg px-4 py-3">
+                <p className="text-slate-100 italic text-sm leading-relaxed">
+                  "discussed the potential for borrowing the monies from USDA or the County repaying itself in the bond referendum."
+                </p>
+                <footer className="mt-1 text-xs text-slate-400">
+                  <span className="font-medium text-slate-300">Mr. Ott</span>{' '}
+                  (August_26_Minutes.pdf, line 168)
+                </footer>
+              </blockquote>
+            </div>
 
-        <p className="text-slate-700 leading-relaxed mb-2">
-          <strong>Dr. Sasscer confirms referendum timeline:</strong>
-        </p>
-        <Quote
-          text="He stated that the bond referendum is scheduled for November of 2022."
-          speaker="Dr. Sasscer"
-          source="August_26_Minutes.pdf, lines 196-197"
-        />
+            <div>
+              <p className="text-slate-300 text-sm mb-1">
+                <strong className="text-white">Commissioner McLaughlin on the tax rate:</strong>
+              </p>
+              <blockquote className="border-l-4 border-blue-400 bg-slate-600 rounded-r-lg px-4 py-3">
+                <p className="text-slate-100 italic text-sm leading-relaxed">
+                  "stated he was encouraged with this progress but stated he wanted to reemphasize the need to move on construction in 2023 to try not to impact the tax rate."
+                </p>
+                <footer className="mt-1 text-xs text-slate-400">
+                  <span className="font-medium text-slate-300">Commissioner McLaughlin</span>{' '}
+                  (August_26_Minutes.pdf, lines 170-171)
+                </footer>
+              </blockquote>
+            </div>
 
-        <p className="text-slate-700 leading-relaxed mb-2">
-          <strong>Mr. Ott presents USDA as alternative:</strong>
-        </p>
-        <Quote
-          text="discussed the potential for borrowing the monies from USDA or the County repaying itself in the bond referendum."
-          speaker="Mr. Ott"
-          source="August_26_Minutes.pdf, line 168"
-        />
+            <div>
+              <p className="text-slate-300 text-sm mb-1">
+                <strong className="text-white">County Manager Howard on existing debt:</strong>
+              </p>
+              <blockquote className="border-l-4 border-blue-400 bg-slate-600 rounded-r-lg px-4 py-3">
+                <p className="text-slate-100 italic text-sm leading-relaxed">
+                  "noted the largest part of the County's debt is to be paid off in 2024."
+                </p>
+                <footer className="mt-1 text-xs text-slate-400">
+                  <span className="font-medium text-slate-300">County Manager Howard</span>{' '}
+                  (August_26_Minutes.pdf, line 163)
+                </footer>
+              </blockquote>
+            </div>
 
-        <p className="text-slate-700 leading-relaxed mb-2">
-          <strong>Commissioner McLaughlin on the tax rate:</strong>
-        </p>
-        <Quote
-          text="stated he was encouraged with this progress but stated he wanted to reemphasize the need to move on construction in 2023 to try not to impact the tax rate."
-          speaker="Commissioner McLaughlin"
-          source="August_26_Minutes.pdf, lines 170-171"
-        />
+            {/* The final four lines */}
+            <div className="mt-6 pt-4 border-t border-slate-500">
+              <h4 className="text-base font-semibold text-white mb-3">
+                The Final Four Lines Before Adjournment
+              </h4>
+              <p className="text-slate-300 text-sm mb-3">
+                Then, in the final four lines before adjournment, the path shifts:
+              </p>
 
-        <p className="text-slate-700 leading-relaxed mb-2">
-          <strong>County Manager Howard on existing debt:</strong>
-        </p>
-        <Quote
-          text="noted the largest part of the County's debt is to be paid off in 2024."
-          speaker="County Manager Howard"
-          source="August_26_Minutes.pdf, line 163"
-        />
+              <blockquote className="border-l-4 border-red-400 bg-slate-600 rounded-r-lg px-4 py-3 mb-3">
+                <p className="text-slate-100 italic text-sm leading-relaxed">
+                  "stated the Commissioners intention is to move forward but the time frame needs to be slid a little bit. He asked if a referendum is needed to apply for USDA loan."
+                </p>
+                <footer className="mt-1 text-xs text-slate-400">
+                  <span className="font-medium text-slate-300">Commissioner Kirby</span>{' '}
+                  (August_26_Minutes.pdf, lines 201-202)
+                </footer>
+              </blockquote>
 
-        <h3 className="text-xl font-semibold text-slate-800 mt-8 mb-4">
-          The Final Four Lines Before Adjournment
-        </h3>
-        <p className="text-slate-700 leading-relaxed mb-4">
-          Then, in the final four lines before adjournment, the path shifts:
-        </p>
+              <blockquote className="border-l-4 border-red-400 bg-slate-600 rounded-r-lg px-4 py-3 mb-3">
+                <p className="text-slate-100 italic text-sm leading-relaxed">
+                  "stated no that is not required."
+                </p>
+                <footer className="mt-1 text-xs text-slate-400">
+                  <span className="font-medium text-slate-300">Mr. Ott (Construction Manager, M.B. Kahn, the private firm later hired to build the school)</span>{' '}
+                  (August_26_Minutes.pdf, line 203)
+                </footer>
+              </blockquote>
 
-        <Quote
-          text="stated the Commissioners intention is to move forward but the time frame needs to be slid a little bit. He asked if a referendum is needed to apply for USDA loan."
-          speaker="Commissioner Kirby"
-          source="August_26_Minutes.pdf, lines 201-202"
-        />
+              <blockquote className="border-l-4 border-red-400 bg-slate-600 rounded-r-lg px-4 py-3 mb-3">
+                <p className="text-slate-100 italic text-sm leading-relaxed">
+                  "noted all of this has to be approved by the LGC."
+                </p>
+                <footer className="mt-1 text-xs text-slate-400">
+                  <span className="font-medium text-slate-300">Commissioner Kirby</span>{' '}
+                  (August_26_Minutes.pdf, line 204)
+                </footer>
+              </blockquote>
 
-        <Quote
-          text="stated no that is not required."
-          speaker="Mr. Ott (Construction Manager, M.B. Kahn, the private firm later hired to build the school)"
-          source="August_26_Minutes.pdf, line 203"
-        />
-
-        <Quote
-          text="noted all of this has to be approved by the LGC."
-          speaker="Commissioner Kirby"
-          source="August_26_Minutes.pdf, line 204"
-        />
-
-        <div className="my-4 bg-slate-100 rounded-lg px-5 py-4 text-sm text-slate-700 italic">
-          Meeting adjourned.
+              <div className="bg-slate-600 rounded-lg px-4 py-3 text-sm text-slate-300 italic">
+                Meeting adjourned.
+              </div>
+            </div>
+          </div>
         </div>
 
         <EditorialNote>
@@ -198,11 +349,64 @@ export default function SchoolDebtTimeline() {
         </EditorialNote>
       </section>
 
-      {/* 2021 */}
-      <section className="mb-10">
+      {/* ============================================================ */}
+      {/* D. THE DETAILED RECORD                                        */}
+      {/* ============================================================ */}
+      <section ref={detailRef} className="mb-10 print:break-before-page">
         <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
-          2021 — The Board Chooses USDA Over Referendum
+          The Detailed Record
         </h2>
+
+        {/* --- 2018 --- */}
+        <h3 className="text-xl font-semibold text-slate-800 mt-8 mb-3 border-b border-slate-200 pb-1">
+          2018 — Voters Reject the School Bond
+        </h3>
+        <p className="text-slate-700 leading-relaxed">
+          <strong>November 2018</strong> — Chowan County voters reject a bond referendum for a new
+          John A. Holmes High School. Under the NC Constitution (Art. V, Sec. 4), general obligation
+          bonds require voter approval. The voters said no.
+        </p>
+
+        {/* --- 2019 --- */}
+        <h3 className="text-xl font-semibold text-slate-800 mt-8 mb-3 border-b border-slate-200 pb-1">
+          2019 — The County Prepares to Try Again
+        </h3>
+        <p className="text-slate-700 leading-relaxed">
+          <strong>November 18, 2019</strong> — Board approves Davenport &amp; Company (up to $30,000)
+          and Parker Poe (~$20,000) to prepare for a 2020 bond referendum. Commissioner McLaughlin
+          objects that the process "seems rushed."
+        </p>
+
+        {/* --- 2020 --- */}
+        <h3 className="text-xl font-semibold text-slate-800 mt-8 mb-3 border-b border-slate-200 pb-1">
+          2020 — COVID Stops the Second Referendum, a New Path Emerges
+        </h3>
+
+        <p className="text-slate-700 leading-relaxed mb-4">
+          <strong>May 4-18, 2020</strong> — Board abandons 2020 bond referendum due to COVID-19.
+        </p>
+
+        <Quote
+          text="due to the impact of COVID 19, we would no longer pursue a bond referendum for 2020."
+          speaker="Chair Kersey"
+          source=""
+        />
+
+        <p className="text-slate-700 leading-relaxed mb-4">
+          <strong>August 26, 2020</strong> — The pivot meeting. See the{' '}
+          <button
+            onClick={() => pivotRef.current?.scrollIntoView({ behavior: 'smooth' })}
+            className="text-blue-700 hover:text-blue-900 underline cursor-pointer"
+          >
+            featured section above
+          </button>{' '}
+          for the full verbatim record of this meeting.
+        </p>
+
+        {/* --- 2021 --- */}
+        <h3 className="text-xl font-semibold text-slate-800 mt-8 mb-3 border-b border-slate-200 pb-1">
+          2021 — The Board Chooses USDA Over Referendum
+        </h3>
 
         <p className="text-slate-700 leading-relaxed mb-4">
           <strong>March 2, 2021</strong> — Board retreat: "Board members indicated their preference
@@ -252,13 +456,16 @@ export default function SchoolDebtTimeline() {
           speaker="Chair Kirby"
           source=""
         />
-      </section>
 
-      {/* 2022 */}
-      <section className="mb-10">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
-          2022 — Reappraisal and Cycle Change
-        </h2>
+        <p className="text-slate-700 leading-relaxed mb-2">
+          <strong>September 2021</strong> — M.B. Kahn (CMAR) and LS3P (architect) approved for the
+          Holmes High School project. No competitive RFP was conducted for either selection.
+        </p>
+
+        {/* --- 2022 --- */}
+        <h3 className="text-xl font-semibold text-slate-800 mt-8 mb-3 border-b border-slate-200 pb-1 print:break-before-page">
+          2022 — Reappraisal, Rate Setting, and Cycle Change
+        </h3>
 
         <p className="text-slate-700 leading-relaxed mb-4">
           <strong>January 1, 2022</strong> — 2022 reappraisal takes effect. Tax base increases 22.2%
@@ -292,13 +499,32 @@ export default function SchoolDebtTimeline() {
           growth — which directly benefits a county carrying new debt. The Board's discussion contains
           no mention of school debt, USDA loan, or revenue needs.
         </EditorialNote>
-      </section>
 
-      {/* 2024-2025 */}
-      <section className="mb-10">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
+        {/* --- 2023 --- */}
+        <h3 className="text-xl font-semibold text-slate-800 mt-8 mb-3 border-b border-slate-200 pb-1">
+          2023 — Costs Rise, GMP Approved
+        </h3>
+
+        <p className="text-slate-700 leading-relaxed mb-4">
+          <strong>February 2023</strong> — Vincent Valuations contracted for the 2026 reappraisal
+          at $947,000 (combined with Perquimans County). This is in addition to the $378,400 paid
+          for the 2022 reappraisal.
+        </p>
+
+        <p className="text-slate-700 leading-relaxed mb-4">
+          <strong>September 2023</strong> — Chair Kirby discloses that his brother has a subcontract
+          on the Holmes High School project. The Board approves the $82.4 million Guaranteed Maximum
+          Price (GMP) with M.B. Kahn.
+        </p>
+
+        <p className="text-slate-700 leading-relaxed mb-4">
+          <strong>November 2023</strong> — PNC financing approved with a 9% interest rate floor.
+        </p>
+
+        {/* --- 2024-2025 --- */}
+        <h3 className="text-xl font-semibold text-slate-800 mt-8 mb-3 border-b border-slate-200 pb-1">
           2024-2025 — Costs Rise, Rate Climbs
-        </h2>
+        </h3>
 
         <p className="text-slate-700 leading-relaxed mb-4">
           <strong>By January 2024</strong> — NC Dept of Revenue measures Chowan County's median
@@ -316,13 +542,11 @@ export default function SchoolDebtTimeline() {
           wind farm revenue and additional fund balance. Fund balance at 25.24% — barely above the
           25% policy minimum. Howard's 2022 advisement about fund balance spending has materialized.
         </p>
-      </section>
 
-      {/* 2026 */}
-      <section className="mb-10">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
+        {/* --- 2026 --- */}
+        <h3 className="text-xl font-semibold text-slate-800 mt-8 mb-3 border-b border-slate-200 pb-1">
           2026 — The Reappraisal Arrives
-        </h2>
+        </h3>
 
         <p className="text-slate-700 leading-relaxed mb-2">
           <strong>September 15, 2025</strong> — 2026 reappraisal presented. Increases range from 15%
@@ -345,8 +569,78 @@ export default function SchoolDebtTimeline() {
         </p>
       </section>
 
-      {/* By the Numbers */}
-      <section className="mb-10">
+      {/* ============================================================ */}
+      {/* E. M.B. KAHN FEE & COST ESCALATION                           */}
+      {/* ============================================================ */}
+      <section ref={feeRef} className="mb-10 print:break-before-page">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
+          M.B. Kahn Fee &amp; Cost Escalation
+        </h2>
+
+        <p className="text-slate-700 leading-relaxed mb-4">
+          M.B. Kahn was selected as the Construction Manager at Risk (CMAR) for the Holmes High
+          School project. Their fee was set at 3.5% of construction cost. As the project scope grew,
+          the fee grew with it:
+        </p>
+
+        <ResponsiveTable
+          headers={['Metric', 'Value']}
+          rows={[
+            ['CMAR fee rate', '3.5% of construction cost'],
+            ['Original scope (3.5% of $40M)', '$1,400,000'],
+            ['At $50M approved (3.5% of $50M)', '$1,750,000'],
+            ['At $64M expanded (3.5% of $64M)', '$2,240,000'],
+            ['Sasscer proposal: cap fee at $50M base', '$1,750,000'],
+            ['Howard proposal: cap at $50M', 'Under discussion'],
+            ['Final GMP (Sep 2023)', '$82.4 million'],
+          ]}
+        />
+
+        <h3 className="text-xl font-semibold text-slate-800 mt-6 mb-3">
+          The Fee Confrontation (June 9, 2022)
+        </h3>
+        <p className="text-slate-700 leading-relaxed mb-2">
+          Chair Kirby confronted M.B. Kahn on record about the fee increase:
+        </p>
+        <Quote
+          text="Mr. Ott stated that at the time negotiating the construction manager at risk contract that the fee would not change. He stated now the fee has changed."
+          speaker="Chair Kirby"
+          source="BOC June 9, 2022 Special 9am Meeting Minutes"
+        />
+
+        <p className="text-slate-700 leading-relaxed mb-2">
+          M.B. Kahn's representative, Mr. Cram, responded:
+        </p>
+        <Quote
+          text="Mr. Ott was referring to the fee percentage not absolute dollar cash cost"
+          speaker="Mr. Cram (M.B. Kahn)"
+          source="BOC June 9, 2022 Special 9am Meeting Minutes"
+        />
+
+        <EditorialNote>
+          <strong>Note:</strong> The distinction matters. A 3.5% fee on $40M is $1.4M. A 3.5% fee on
+          $82.4M is $2.88M. The percentage stayed the same; the dollar cost more than doubled.
+          Sasscer and Howard both attempted to cap the fee at the original $50M base, but the final
+          GMP was approved at $82.4M.
+        </EditorialNote>
+
+        <h3 className="text-xl font-semibold text-slate-800 mt-6 mb-3">
+          LS3P Architect Fee
+        </h3>
+        <p className="text-slate-700 leading-relaxed mb-2">
+          LS3P's architect fee was set at 5.75% of construction cost. LS3P indicated willingness to
+          honor the contract fee at the $40M level, but additional charges for auditorium upgrades
+          and scope additions were billed at $245/hour.
+        </p>
+        <p className="text-xs text-slate-500">
+          Source: BOC June 9, 2022 Special 9am Meeting Minutes.
+        </p>
+      </section>
+
+      {/* ============================================================ */}
+      {/* By the Numbers                                                */}
+      {/* ============================================================ */}
+      <section className="mb-10 print:break-before-page">
         <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
           By the Numbers
         </h2>
@@ -358,7 +652,7 @@ export default function SchoolDebtTimeline() {
             ['County debt (pre-Holmes)', '$7M (retiring by 2025)', 'Retired'],
             ['Holmes HS project', '$50M (approved Apr 2021)', '~$85M (reported cost)'],
             ['Holmes HS annual debt service', '~$2M/yr (Davenport projection at $50M)', '~$3.4 million/year'],
-            ['School as % of property tax', '—', '58.7% of $14M levy'],
+            ['School as % of property tax', '\u2014', '58.7% of $14M levy'],
             ['Tax rate', '$0.755 (2021-22)', '$0.695 (2025-26)'],
             ['Tax base', '$1.49 billion', '$2.00 billion'],
             ['Property tax revenue', '~$11.2M', '~$14.0M (+25%)'],
@@ -368,7 +662,9 @@ export default function SchoolDebtTimeline() {
         />
       </section>
 
-      {/* Where Did the Guidance Come From? */}
+      {/* ============================================================ */}
+      {/* Where Did the Guidance Come From?                             */}
+      {/* ============================================================ */}
       <section className="mb-10">
         <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
           Where Did the Guidance Come From?
@@ -390,8 +686,10 @@ export default function SchoolDebtTimeline() {
         </EditorialNote>
       </section>
 
-      {/* Tax Rate Scenarios */}
-      <section className="mb-10">
+      {/* ============================================================ */}
+      {/* F. TAX IMPACT SECTION                                         */}
+      {/* ============================================================ */}
+      <section ref={taxRef} className="mb-10 print:break-before-page">
         <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
           What the Reappraisal Means for Your Tax Rate
         </h2>
@@ -408,7 +706,7 @@ export default function SchoolDebtTimeline() {
         <ResponsiveTable
           headers={['Year', 'Assessed Value', 'Tax Rate', 'Annual Bill', 'Change from FY2021-22']}
           rows={[
-            ['FY2021-22 (before reappraisal)', '$200,000', '$0.755', '$1,510', '—'],
+            ['FY2021-22 (before reappraisal)', '$200,000', '$0.755', '$1,510', '\u2014'],
             ['FY2022-23 (after 2022 reappraisal)', '$244,400', '$0.665', '$1,625', '+$115 (+7.6%)'],
             ['FY2024-25 (rate increase, no reappraisal)', '$244,400', '$0.695', '$1,699', '+$189 (+12.5%)'],
           ]}
@@ -442,7 +740,15 @@ export default function SchoolDebtTimeline() {
           rows={[
             ['Revenue-neutral (RNR)', '~$0.498', '~$1,704', '+$5 (about the same)', '+$194 (+13%)'],
             ['Board pattern: 5% above RNR', '~$0.523', '~$1,789', '+$91 (+5%)', '+$279 (+18%)'],
-            ['Board pattern: 10% above RNR', '~$0.548', '~$1,874', '+$176 (+10%)', '+$364 (+24%)'],
+            [
+              <span className="flex items-center gap-2">
+                Board pattern: 10% above RNR
+                <span className="inline-block text-xs font-semibold bg-blue-100 text-blue-800 border border-blue-300 rounded px-1.5 py-0.5">
+                  Likely scenario based on Board's documented pattern
+                </span>
+              </span>,
+              '~$0.548', '~$1,874', '+$176 (+10%)', '+$364 (+24%)'
+            ],
             ['Manager pattern: 15% above RNR', '~$0.573', '~$1,960', '+$261 (+15%)', '+$450 (+30%)'],
           ]}
         />
@@ -497,7 +803,9 @@ export default function SchoolDebtTimeline() {
         </div>
       </section>
 
-      {/* Understanding Your Assessment */}
+      {/* ============================================================ */}
+      {/* Understanding Your Assessment                                 */}
+      {/* ============================================================ */}
       <section className="mb-10">
         <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
           Understanding Your Assessment
@@ -520,8 +828,10 @@ export default function SchoolDebtTimeline() {
         </p>
       </section>
 
-      {/* What You Can Do */}
-      <section className="mb-10">
+      {/* ============================================================ */}
+      {/* G. WHAT YOU CAN DO                                            */}
+      {/* ============================================================ */}
+      <section ref={actionRef} className="mb-10 print:break-before-page">
         <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
           What You Can Do
         </h2>
@@ -557,7 +867,9 @@ export default function SchoolDebtTimeline() {
         </div>
       </section>
 
-      {/* Tax Relief Programs */}
+      {/* ============================================================ */}
+      {/* Tax Relief Programs                                           */}
+      {/* ============================================================ */}
       <section className="mb-10">
         <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
           Tax Relief Programs
@@ -571,14 +883,104 @@ export default function SchoolDebtTimeline() {
           <li><strong>Tax Deferral</strong> (G.S. 105-277.1C)</li>
         </ul>
         <p className="text-slate-700">
-          Contact: Chowan County Tax Office{' '}
-          <a href="tel:2524828486" className="text-blue-700 hover:text-blue-900 underline">
-            (252) 482-8486
-          </a>
+          Visit{' '}
+          <a
+            href="https://www.chowancounty-nc.gov"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-700 hover:text-blue-900 underline"
+          >
+            chowancounty-nc.gov
+          </a>{' '}
+          for contact information.
         </p>
       </section>
 
-      {/* Sources Footer */}
+      {/* ============================================================ */}
+      {/* J. APPENDIX: WHO'S WHO (moved to end)                         */}
+      {/* ============================================================ */}
+      <section className="mb-10 print:break-before-page">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
+          Appendix: Key Figures Referenced in This Report
+        </h2>
+        <ResponsiveTable
+          headers={['Name', 'Role', 'Relevance']}
+          rows={[
+            [<strong>Patti Kersey</strong>, 'Chair, Chowan County BOC (2019-2020)', 'Presided over referendum cancellation and early USDA discussions'],
+            [<strong>Bob Kirby</strong>, 'Commissioner (2019-2020), then Chair (2021-present)', 'Asked if referendum was needed; linked revaluation to debt capacity; confronted Kahn on fee increase'],
+            [<strong>Kevin Howard</strong>, 'Chowan County Manager', 'Proposed budgets; advised about fund balance use; stated debt ratio would be "addressed at the revaluation"'],
+            [<strong>Rick Ott</strong>, 'Construction Manager, M.B. Kahn', 'Told the Board no referendum was needed for USDA (this guidance came from the project\'s own contractor)'],
+            [<strong>Ron Cummings</strong>, 'Commissioner', 'Raised concern about fixed-income residents being "priced out of their homes"'],
+            [<strong>Larry McLaughlin</strong>, 'Commissioner', 'Objected that the 2019 bond process "seems rushed"'],
+            [<strong>Commissioner Kehayes</strong>, 'Commissioner', 'Raised concern about debt-to-assessed-value ratio'],
+            [<strong>Chris Hill</strong>, 'Chowan County Tax Administrator', 'Presented reappraisal data'],
+            [<strong>Ryan Vincent</strong>, 'Owner, Vincent Valuations', 'Conducted 2022 and 2026 reappraisals'],
+            [<strong>Radke</strong>, 'Former Tax Administrator', 'Presented the resolution to shorten reappraisal cycle'],
+            [<><strong>Davenport</strong> &amp; <strong>Associates</strong></>, 'County\'s financial advisor', 'Modeled school debt; projected "no impact on current tax rate" for $50M project'],
+            [<strong>Cathy Smith</strong>, 'Chowan County Finance Officer', 'Presented budget and financial data'],
+            [<strong>Mr. Cram</strong>, 'M.B. Kahn representative', 'Responded to fee confrontation; distinguished fee percentage from dollar amount'],
+            [<strong>Dr. Sasscer</strong>, 'Superintendent', 'Confirmed referendum timeline; proposed capping Kahn fee at $50M base'],
+          ]}
+        />
+      </section>
+
+      {/* ============================================================ */}
+      {/* I. SOURCE MATERIALS PACKAGE                                   */}
+      {/* ============================================================ */}
+      <section className="mb-10">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
+          Source Materials Package
+        </h2>
+        <p className="text-slate-700 leading-relaxed mb-4">
+          Media and researchers can request the complete source materials package, which includes:
+          original BOC meeting minute PDFs, deed records, NC Secretary of State filings, IRS Form
+          990s, and all data referenced in this report.
+        </p>
+        <a
+          href="/contact"
+          className="inline-block bg-blue-700 hover:bg-blue-800 text-white font-medium text-sm px-5 py-2.5 rounded-lg transition-colors"
+        >
+          Request source materials
+        </a>
+      </section>
+
+      {/* ============================================================ */}
+      {/* H. TERMS OF SERVICE                                           */}
+      {/* ============================================================ */}
+      <section className="mb-10 print:break-before-page">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
+          Terms of Service
+        </h2>
+        <div className="bg-slate-50 border border-slate-200 rounded-lg p-5">
+          <ul className="list-disc pl-6 text-slate-700 space-y-2 text-sm leading-relaxed">
+            <li>
+              This analysis is produced from public records and is provided for informational
+              purposes only.
+            </li>
+            <li>
+              It does not constitute legal, financial, or tax advice.
+            </li>
+            <li>
+              Information is provided "as is" without warranty of any kind.
+            </li>
+            <li>
+              If any information is found to be inaccurate, it will be updated to match official
+              records upon notification.
+            </li>
+            <li>
+              Use of this information is at your own risk.
+            </li>
+            <li>
+              Source materials are available upon request for verification by news organizations
+              or the public.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* FOOTER                                                        */}
+      {/* ============================================================ */}
       <footer className="border-t-2 border-slate-200 pt-6 mt-12">
         <p className="text-xs text-slate-500 leading-relaxed mb-2">
           All data sourced from official Chowan County Board of Commissioner meeting minutes, Chowan
