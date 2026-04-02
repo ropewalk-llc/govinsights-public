@@ -139,7 +139,7 @@ export default function SchoolDebtTimeline() {
             County expenditure records show that M.B. Kahn received $404,171 in eight payments from
             county Fund 45 between January and August 2021 &mdash; before the Board of Commissioners
             voted on the Kahn contract on September 20, 2021. Who authorized these pre-vote payments
-            is not documented in the 339 BOC documents reviewed for this report. Under NC G.S.
+            is not documented in the 480 BOC documents reviewed for this report. Under NC G.S.
             &sect;159-28, county expenditures require prior authorization. No hiring resolution, contract
             award, or qualifications-based selection process (as required for CMAR under G.S.
             143-128.1) was found in any BOC document. Total payments to Kahn through August 2023
@@ -938,6 +938,64 @@ export default function SchoolDebtTimeline() {
       </section>
 
       {/* ============================================================ */}
+      {/* SCOPE OF REVIEW                                               */}
+      {/* ============================================================ */}
+      <section className="mb-10 print:break-before-page">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
+          Scope of Review
+        </h2>
+
+        <h3 className="text-lg font-semibold text-slate-800 mt-4 mb-3">What Was Reviewed</h3>
+        <div className="bg-slate-50 border border-slate-200 rounded-lg p-5 mb-4">
+          <ul className="list-disc pl-6 text-slate-700 space-y-2 text-sm leading-relaxed">
+            <li><strong>480 documents</strong> from the Chowan County Board of Commissioners, including meeting minutes, agenda packets (with expenditure ledgers), retreat minutes, special meeting minutes, CIP Committee minutes, and Joint Committee minutes.</li>
+            <li><strong>Coverage period:</strong> 2019 through March 2026.</li>
+            <li><strong>Source:</strong> All documents downloaded from chowancounty-nc.gov (Agendas &amp; Minutes page and Archives 2003-2025 page).</li>
+            <li><strong>Verification:</strong> Every document in the collection has been SHA-256 hashed at time of acquisition for integrity verification. The full hash log is available upon request.</li>
+            <li><strong>Completeness:</strong> The collection was verified against the county website on April 2, 2026. Only 2 documents were found to be absent and were subsequently downloaded. The collection is complete relative to what the county has made publicly available.</li>
+          </ul>
+        </div>
+
+        <h3 className="text-lg font-semibold text-slate-800 mt-6 mb-3">What Was NOT Reviewed (Not Publicly Available)</h3>
+        <p className="text-slate-700 text-sm mb-3">
+          The following records are referenced in BOC minutes but were not attached to any publicly posted agenda packet or minutes document. Their absence means the public record does not contain the information needed to fully evaluate certain decisions documented in this report.
+        </p>
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-5 mb-4">
+          <ul className="list-disc pl-6 text-slate-700 space-y-3 text-sm leading-relaxed">
+            <li>
+              <strong>Board of Education meeting minutes</strong> — Maintained separately by Edenton-Chowan Public Schools (ecps.us). The BOE is a separate elected body. BOC minutes reference that Kahn was presented as a "request from Edenton-Chowan Board of Education" (April 18, 2022). The BOE minutes may contain the Kahn hiring authorization and selection process.
+              <span className="block text-amber-700 text-xs mt-1">NC Public Records Request required to: Edenton-Chowan Board of Education</span>
+            </li>
+            <li>
+              <strong>M.B. Kahn CMAR contract</strong> — The executed Construction Manager at Risk agreement, including fee schedule, scope, amendments, and change orders. BOC minutes reference the contract but the document itself is not publicly posted.
+              <span className="block text-amber-700 text-xs mt-1">NC Public Records Request required to: Chowan County Manager's Office</span>
+            </li>
+            <li>
+              <strong>Kahn qualifications-based selection records</strong> — Under G.S. 143-128.1, CMAR contracts use qualifications-based selection. No RFQ, selection committee records, scoring criteria, or evaluation summaries were found in any of the 480 BOC documents. If a competitive selection process occurred, it is not documented in the publicly available BOC record.
+              <span className="block text-amber-700 text-xs mt-1">NC Public Records Request required to: Chowan County Manager's Office and/or Edenton-Chowan Board of Education</span>
+            </li>
+            <li>
+              <strong>USDA loan agreement and amortization schedule</strong> — The USDA Rural Development loan terms, approved amount, interest rate, repayment schedule, and any conditions or covenants. The BOC approved the application (June 21, 2021) but the executed agreement is not publicly posted.
+              <span className="block text-amber-700 text-xs mt-1">NC Public Records Request required to: Chowan County Manager's Office. Also available via USDA Rural Development, Raleigh NC office.</span>
+            </li>
+            <li>
+              <strong>Davenport &amp; Associates updated financial projections</strong> — Davenport projected "no impact on current tax rate" based on a $50M project (March 22, 2021). The project reached approximately $85M. Whether Davenport updated its analysis when costs escalated 70% is not documented in any publicly available BOC minutes or agenda packet.
+              <span className="block text-amber-700 text-xs mt-1">NC Public Records Request required to: Chowan County Manager's Office</span>
+            </li>
+            <li>
+              <strong>PNC Bank financing selection records</strong> — The PNC Bank financing ($34,998,500 at a 9% rate floor) was presented in the November 20, 2023 agenda packet. No competitive quotes from other financial institutions are documented. Truist offered a 2.26% competitive rate in August 2021.
+              <span className="block text-amber-700 text-xs mt-1">NC Public Records Request required to: Chowan County Manager's Office</span>
+            </li>
+          </ul>
+        </div>
+
+        <h3 className="text-lg font-semibold text-slate-800 mt-6 mb-3">Note on County Audits</h3>
+        <p className="text-slate-700 text-sm leading-relaxed">
+          The county's annual financial audit (conducted by TPSA) verifies that dollar amounts are accurately recorded in the financial statements. It confirms the math is correct. It does not audit whether expenditures were properly authorized under NC G.S. &sect;159-28, whether USDA procurement requirements (2 CFR 200) were followed, whether CMAR selection procedures under G.S. 143-128.1 were conducted, or whether pre-contract payments had proper Board authorization. A clean audit means the books balance; it does not address the procedural questions raised in this report.
+        </p>
+      </section>
+
+      {/* ============================================================ */}
       {/* I. SOURCE MATERIALS PACKAGE                                   */}
       {/* ============================================================ */}
       <section className="mb-10">
@@ -946,8 +1004,8 @@ export default function SchoolDebtTimeline() {
         </h2>
         <p className="text-slate-700 leading-relaxed mb-4">
           Media and researchers can request the complete source materials package, which includes:
-          original BOC meeting minute PDFs, BOC agenda packets, and all public data referenced in
-          this report.
+          all 480 original BOC meeting minute and agenda packet PDFs, SHA-256 integrity hashes,
+          and the provenance log documenting acquisition source and date for every document.
         </p>
         <a
           href="/contact"
