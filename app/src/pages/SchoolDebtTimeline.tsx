@@ -48,7 +48,7 @@ function VisualTimeline() {
           <span className="inline-block w-3 h-3 rounded-full bg-amber-500" /> Financial
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="inline-block w-3 h-3 rounded-full bg-red-500" /> Escalation
+          <span className="inline-block w-3 h-3 rounded-full bg-red-500" /> Key decision point
         </span>
       </div>
 
@@ -117,12 +117,45 @@ export default function SchoolDebtTimeline() {
       </header>
 
       {/* ============================================================ */}
-      {/* A. EXECUTIVE SUMMARY                                          */}
+      {/* A. SUMMARY                                                    */}
       {/* ============================================================ */}
       <section className="mb-10 print:break-before-page">
         <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
-          Executive Summary
+          Summary
         </h2>
+
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 space-y-4 text-slate-800 leading-relaxed mb-6">
+          <p>
+            When your property tax bill arrives, it can be hard to understand why it changed. The
+            decisions that determine your taxes are spread across years of board meetings, budget votes,
+            and financing agreements. Each one may seem routine on its own, but together they form a
+            chain that directly affects what you pay.
+          </p>
+
+          <p>
+            This report traces that chain for Chowan County. It follows the sequence of decisions
+            surrounding the new John A. Holmes High School &mdash; from the 2018 bond referendum
+            through the 2026 property reappraisal &mdash; using the county's own meeting minutes
+            and budget documents. These decisions may appear unconnected, but they are directly
+            linked when it comes to how much debt the county carries and how that debt is paid for
+            through your property taxes.
+          </p>
+
+          <p>
+            The goal is clarity. County budgets are complex, and most residents do not have time to
+            read seven years of board minutes. This analysis does that work and presents the documented
+            sequence so that citizens can ask informed questions at budget hearings and understand what
+            is driving changes to their tax bills.
+          </p>
+
+          <p className="text-sm text-blue-800 font-medium">
+            Informed citizens make up the backbone of local governance. Access to factual information
+            about how public resources are used produces measurably better governance outcomes.
+            That is the entire premise of GovInsights.
+          </p>
+        </div>
+
+        <h3 className="text-lg font-semibold text-slate-800 mb-3">Detailed Findings</h3>
 
         <div className="bg-slate-50 border border-slate-200 rounded-lg p-5 space-y-4 text-slate-700 leading-relaxed">
           <p>
@@ -130,9 +163,10 @@ export default function SchoolDebtTimeline() {
             High School. Under the North Carolina Constitution, general obligation bonds require voter
             approval, and the voters said no. A second referendum was planned for 2020 but cancelled
             due to COVID-19. The Board subsequently approved USDA installment financing under G.S.
-            160A-20, which does not require voter approval. The guidance that no referendum was needed came not from the county attorney or
-            the Local Government Commission, but from Rick Ott of M.B. Kahn Construction &mdash; a firm
-            that was already working on the project and receiving county payments at the time.
+            160A-20, which does not require voter approval. The guidance that no referendum was needed
+            came not from the county attorney or the Local Government Commission, but from Rick Ott
+            of M.B. Kahn Construction &mdash; a firm that was already working on the project and
+            receiving county payments at the time.
           </p>
 
           <p>
@@ -148,21 +182,20 @@ export default function SchoolDebtTimeline() {
 
           <p>
             The project, originally scoped at $50 million with a Davenport &amp; Associates projection
-            of "no impact on current tax rate," escalated to approximately $85 million. M.B. Kahn's
-            Construction Manager at Risk (CMAR) fee was set at 3.5% of construction cost, originally
-            scoped on a $40 million base ($1.4 million). As costs grew, the fee grew with it. Chair
-            Kirby confronted Kahn on record about the fee increase; Kahn's representative responded that
-            the original commitment referred to the percentage, not the dollar amount. LS3P's architect
-            fee was 5.75% of construction cost.
+            of "no impact on current tax rate," grew to approximately $85 million through a series of
+            Board-approved scope and budget changes. M.B. Kahn's Construction Manager at Risk (CMAR)
+            fee was set at 3.5% of construction cost, originally scoped on a $40 million base ($1.4
+            million). As costs grew, the fee grew with it. Chair Kirby confronted Kahn on record about
+            the fee increase; Kahn's representative responded that the original commitment referred to
+            the percentage, not the dollar amount. LS3P's architect fee was 5.75% of construction cost.
           </p>
 
           <p>
             Since the project was approved, the county has never adopted a revenue-neutral tax rate
             after a reappraisal. The Board adopted 4.7% above revenue-neutral in 2022 and raised the
             rate again in 2024. In 2022, the Board also shortened the reappraisal cycle from 8 years to
-            4 years, accelerating tax base growth in a rising market. The 2026 reappraisal, which took
-            effect January 1, 2026, increased property values county-wide by an estimated 38-42%, with
-            individual increases ranging from 15% to 161%.
+            4 years. The 2026 reappraisal, which took effect January 1, 2026, increased property values
+            county-wide by an estimated 38-42%, with individual increases ranging from 15% to 161%.
           </p>
 
           <p>
@@ -587,7 +620,7 @@ export default function SchoolDebtTimeline() {
       {/* ============================================================ */}
       <section ref={feeRef} className="mb-10 print:break-before-page">
         <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b-2 border-blue-200 pb-2">
-          M.B. Kahn Fee &amp; Cost Escalation
+          M.B. Kahn Fee &amp; Project Cost Changes
         </h2>
 
         <p className="text-slate-700 leading-relaxed mb-4">
@@ -695,7 +728,7 @@ export default function SchoolDebtTimeline() {
           <strong>Note:</strong> The Board relied on these sources when making decisions that
           committed the county to decades of debt without voter approval. The question is whether the
           Board received independent analysis of the long-term fiscal impact — particularly after
-          costs escalated from $50M to $85M.
+          costs grew from $50M to $85M through Board-approved changes.
         </EditorialNote>
       </section>
 
@@ -956,9 +989,9 @@ export default function SchoolDebtTimeline() {
           </ul>
         </div>
 
-        <h3 className="text-lg font-semibold text-slate-800 mt-6 mb-3">What Was NOT Reviewed (Not Publicly Available)</h3>
+        <h3 className="text-lg font-semibold text-slate-800 mt-6 mb-3">Records Needed to Complete This Analysis</h3>
         <p className="text-slate-700 text-sm mb-3">
-          The following records are referenced in BOC minutes but were not attached to any publicly posted agenda packet or minutes document. Their absence means the public record does not contain the information needed to fully evaluate certain decisions documented in this report.
+          The following records are referenced in BOC minutes but were not attached to any publicly posted agenda packet or minutes document. These records are needed to complete this analysis. Without them, the public record does not contain the information necessary to fully evaluate certain decisions documented in this report.
         </p>
         <div className="bg-amber-50 border border-amber-200 rounded-lg p-5 mb-4">
           <ul className="list-disc pl-6 text-slate-700 space-y-3 text-sm leading-relaxed">
@@ -979,7 +1012,7 @@ export default function SchoolDebtTimeline() {
               <span className="block text-amber-700 text-xs mt-1">NC Public Records Request required to: Chowan County Manager's Office. Also available via USDA Rural Development, Raleigh NC office.</span>
             </li>
             <li>
-              <strong>Davenport &amp; Associates updated financial projections</strong> — Davenport projected "no impact on current tax rate" based on a $50M project (March 22, 2021). The project reached approximately $85M. Whether Davenport updated its analysis when costs escalated 70% is not documented in any publicly available BOC minutes or agenda packet.
+              <strong>Davenport &amp; Associates updated financial projections</strong> — Davenport projected "no impact on current tax rate" based on a $50M project (March 22, 2021). The project reached approximately $85M. Whether Davenport updated its analysis when costs increased 70% is not documented in any publicly available BOC minutes or agenda packet.
               <span className="block text-amber-700 text-xs mt-1">NC Public Records Request required to: Chowan County Manager's Office</span>
             </li>
             <li>
@@ -991,7 +1024,10 @@ export default function SchoolDebtTimeline() {
 
         <h3 className="text-lg font-semibold text-slate-800 mt-6 mb-3">Note on County Audits</h3>
         <p className="text-slate-700 text-sm leading-relaxed">
-          The county's annual financial audit (conducted by TPSA) verifies that dollar amounts are accurately recorded in the financial statements. It confirms the math is correct. It does not audit whether expenditures were properly authorized under NC G.S. &sect;159-28, whether USDA procurement requirements (2 CFR 200) were followed, whether CMAR selection procedures under G.S. 143-128.1 were conducted, or whether pre-contract payments had proper Board authorization. A clean audit means the books balance; it does not address the procedural questions raised in this report.
+          The county's annual financial audit verifies that dollar amounts are correctly recorded.
+          It does not audit processes or programs. The procedural questions raised in this
+          report &mdash; such as expenditure authorization and contractor selection &mdash; are
+          outside the scope of a financial statement audit.
         </p>
       </section>
 
