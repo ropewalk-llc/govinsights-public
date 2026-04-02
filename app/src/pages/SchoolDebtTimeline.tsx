@@ -128,9 +128,9 @@ export default function SchoolDebtTimeline() {
           <p>
             In November 2018, Chowan County voters rejected a bond referendum for a new John A. Holmes
             High School. Under the North Carolina Constitution, general obligation bonds require voter
-            approval, and the voters said no. Rather than accept that result, the Board of Commissioners
-            pursued an alternative: USDA installment financing under G.S. 160A-20, which does not require
-            a referendum. The guidance that no referendum was needed came not from the county attorney or
+            approval, and the voters said no. A second referendum was planned for 2020 but cancelled
+            due to COVID-19. The Board subsequently approved USDA installment financing under G.S.
+            160A-20, which does not require voter approval. The guidance that no referendum was needed came not from the county attorney or
             the Local Government Commission, but from Rick Ott of M.B. Kahn Construction &mdash; a firm
             that was already working on the project and receiving county payments at the time.
           </p>
