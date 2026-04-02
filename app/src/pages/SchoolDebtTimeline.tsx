@@ -18,7 +18,8 @@ const timelineEvents: TimelineEvent[] = [
   { date: 'May 2020', title: 'COVID cancels 2nd referendum', color: 'blue' },
   { date: 'Aug 2020', title: 'Ott says no referendum needed for USDA', color: 'red' },
   { date: 'Apr 2021', title: '$50M project approved 7-0', color: 'amber' },
-  { date: 'Sep 2021', title: 'Kahn/LS3P approved (no RFP)', color: 'amber' },
+  { date: 'Jan-Aug 2021', title: '$404K paid to Kahn before BOC vote', color: 'red' },
+  { date: 'Sep 2021', title: 'Kahn/LS3P approved 7-0 (no selection process documented)', color: 'amber' },
   { date: 'Jun 2022', title: 'Project expands to $75M', color: 'red' },
   { date: 'Jun 2022', title: 'Rate set above RNR, $1.15M from fund balance', color: 'amber' },
   { date: 'Aug 2022', title: 'Reappraisal cycle shortened to 4 years', color: 'amber' },
@@ -130,8 +131,19 @@ export default function SchoolDebtTimeline() {
             approval, and the voters said no. Rather than accept that result, the Board of Commissioners
             pursued an alternative: USDA installment financing under G.S. 160A-20, which does not require
             a referendum. The guidance that no referendum was needed came not from the county attorney or
-            the Local Government Commission, but from Rick Ott of M.B. Kahn Construction, the private
-            contractor that was subsequently hired to build the school.
+            the Local Government Commission, but from Rick Ott of M.B. Kahn Construction &mdash; a firm
+            that was already working on the project and receiving county payments at the time.
+          </p>
+
+          <p>
+            County expenditure records show that M.B. Kahn received $404,171 in eight payments from
+            county Fund 45 between January and August 2021 &mdash; before the Board of Commissioners
+            voted on the Kahn contract on September 20, 2021. Who authorized these pre-vote payments
+            is not documented in the 339 BOC documents reviewed for this report. Under NC G.S.
+            &sect;159-28, county expenditures require prior authorization. No hiring resolution, contract
+            award, or qualifications-based selection process (as required for CMAR under G.S.
+            143-128.1) was found in any BOC document. Total payments to Kahn through August 2023
+            reached $1,407,511.
           </p>
 
           <p>
@@ -141,7 +153,7 @@ export default function SchoolDebtTimeline() {
             scoped on a $40 million base ($1.4 million). As costs grew, the fee grew with it. Chair
             Kirby confronted Kahn on record about the fee increase; Kahn's representative responded that
             the original commitment referred to the percentage, not the dollar amount. LS3P's architect
-            fee was 5.75% of construction cost. Neither firm was selected through a competitive RFP process.
+            fee was 5.75% of construction cost.
           </p>
 
           <p>
@@ -156,9 +168,10 @@ export default function SchoolDebtTimeline() {
           <p>
             Based on the Board's documented pattern of setting rates above revenue-neutral, homeowners
             can expect a cumulative tax increase of approximately 18-30% since FY2021-22. All claims in
-            this report are sourced to Board of Commissioner meeting minutes, deeds, NC Secretary of
-            State filings, IRS Form 990s, and other public records. No claim is based on anonymous
-            sources or speculation.
+            this report are sourced to official Chowan County Board of Commissioner meeting minutes
+            and agenda packets, with supporting data from the U.S. Census Bureau, NC Department of
+            Public Instruction, NC Department of Revenue, and the UNC School of Government. No claim
+            is based on anonymous sources or speculation.
           </p>
         </div>
       </section>
@@ -933,8 +946,8 @@ export default function SchoolDebtTimeline() {
         </h2>
         <p className="text-slate-700 leading-relaxed mb-4">
           Media and researchers can request the complete source materials package, which includes:
-          original BOC meeting minute PDFs, deed records, NC Secretary of State filings, IRS Form
-          990s, and all data referenced in this report.
+          original BOC meeting minute PDFs, BOC agenda packets, and all public data referenced in
+          this report.
         </p>
         <a
           href="/contact"
@@ -983,9 +996,10 @@ export default function SchoolDebtTimeline() {
       {/* ============================================================ */}
       <footer className="border-t-2 border-slate-200 pt-6 mt-12">
         <p className="text-xs text-slate-500 leading-relaxed mb-2">
-          All data sourced from official Chowan County Board of Commissioner meeting minutes, Chowan
-          County GIS, U.S. Census Bureau, NC Department of Revenue, and NC General Statutes. Full
-          documentation available at request.{' '}
+          All data sourced from official Chowan County Board of Commissioner meeting minutes
+          and agenda packets, with supporting data from the U.S. Census Bureau, NC Department of
+          Public Instruction, NC Department of Revenue, UNC School of Government, and NC General
+          Statutes. Full documentation available at request.{' '}
           <a href="/contact" className="text-blue-600 hover:text-blue-800 underline">
             Contact us
           </a>.
