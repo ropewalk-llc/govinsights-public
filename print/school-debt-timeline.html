@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The School Debt Timeline, GovInsights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: letter;
+    margin: 0.75in 0.85in 0.9in 0.85in;
+    @top-center { content: ""; }
+    @bottom-center { content: counter(page); font-size: 9px; color: #64748b; font-family: 'Inter', sans-serif; }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.6;
+    color: #1e293b;
+    background: white;
+  }
+
+  /* ---- COVER PAGE ---- */
+  .cover {
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2in 0;
+  }
+  .cover-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+  .cover-logo {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #1e40af, #1e3a8a);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+  }
+  .cover-brand-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e40af;
+    letter-spacing: -0.5px;
+  }
+  .cover h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+  .cover-subtitle {
+    font-size: 15px;
+    color: #475569;
+    margin-bottom: 40px;
+    line-height: 1.5;
+  }
+  .cover-meta {
+    font-size: 10px;
+    color: #94a3b8;
+    line-height: 1.8;
+  }
+  .cover-meta strong { color: #64748b; }
+  .cover-line {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #1e40af, #3b82f6);
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+
+  /* ---- HEADERS ---- */
+  .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e2e8f0;
+    margin-bottom: 20px;
+    font-size: 8px;
+    color: #94a3b8;
+  }
+  .page-header-logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .page-header-icon {
+    width: 16px;
+    height: 16px;
+    background: #1e40af;
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 8px;
+  }
+  .page-header-text { font-weight: 600; color: #1e40af; font-size: 9px; }
+
+  /* ---- SECTION HEADERS ---- */
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 28px 0 12px 0;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #dbeafe;
+    page-break-after: avoid;
+  }
+  h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 18px 0 8px 0;
+    page-break-after: avoid;
+  }
+
+  /* ---- BODY TEXT ---- */
+  p { margin-bottom: 10px; }
+  .summary-box {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 6px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+  }
+  .summary-box p { color: #1e3a5f; }
+  .summary-box .premise {
+    font-size: 10px;
+    font-weight: 600;
+    color: #1e40af;
+    margin-top: 4px;
+  }
+  .findings-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+  }
+
+  /* ---- TABLES ---- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 16px 0;
+    font-size: 9.5pt;
+    page-break-inside: avoid;
+  }
+  thead { background: #1e293b; }
+  th {
+    color: white;
+    font-weight: 600;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 7px 10px;
+    text-align: left;
+    border: 1px solid #334155;
+  }
+  td {
+    padding: 6px 10px;
+    border: 1px solid #e2e8f0;
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #f8fafc; }
+  tbody tr:hover { background: #f1f5f9; }
+  .table-note {
+    font-size: 8.5pt;
+    color: #64748b;
+    font-style: italic;
+    margin-top: -10px;
+    margin-bottom: 12px;
+  }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .highlight-row { background: #eff6ff !important; border-left: 3px solid #1e40af; }
+  .highlight-row td { font-weight: 500; }
+  .likely-badge {
+    display: inline-block;
+    background: #1e40af;
+    color: white;
+    font-size: 7pt;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
+  /* ---- GUIDANCE TABLE ---- */
+  .guidance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 16px 0;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
+  }
+  .guidance-table th {
+    color: white;
+    font-weight: 600;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 7px 8px;
+    text-align: left;
+    border: 1px solid #334155;
+  }
+  .guidance-table td {
+    padding: 6px 8px;
+    border: 1px solid #e2e8f0;
+    vertical-align: top;
+  }
+  .guidance-table thead { background: #1e293b; }
+  .guidance-table tbody tr:nth-child(even) { background: #f8fafc; }
+  .guidance-table th:nth-child(1) { width: 18%; }
+  .guidance-table th:nth-child(2) { width: 22%; }
+  .guidance-table th:nth-child(3) { width: 30%; }
+  .guidance-table th:nth-child(4) { width: 30%; }
+
+  /* ---- QUOTES ---- */
+  blockquote {
+    border-left: 3px solid #1e40af;
+    padding: 8px 14px;
+    margin: 10px 0;
+    background: #f8fafc;
+    font-style: italic;
+    color: #334155;
+    page-break-inside: avoid;
+  }
+  blockquote p { margin-bottom: 4px; }
+  .quote-source {
+    font-size: 8.5pt;
+    color: #94a3b8;
+    font-style: normal;
+    margin-top: 4px;
+  }
+
+  /* ---- EDITORIAL / CONTEXT NOTES ---- */
+  .note {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-left: 3px solid #f59e0b;
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin: 12px 0;
+    font-size: 9.5pt;
+    page-break-inside: avoid;
+  }
+  .note-title { font-weight: 600; color: #92400e; margin-bottom: 4px; font-size: 9pt; }
+
+  /* ---- FEATURED SECTION (Aug 2020) ---- */
+  .featured {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 16px 18px;
+    margin: 16px 0;
+    page-break-inside: avoid;
+  }
+  .featured h3 { color: #0f172a; margin-top: 0; }
+
+  /* ---- FOIA SECTION ---- */
+  .foia-item {
+    margin-bottom: 10px;
+    padding-left: 12px;
+    border-left: 2px solid #f59e0b;
+  }
+  .foia-target {
+    font-size: 8.5pt;
+    color: #92400e;
+    margin-top: 2px;
+  }
+
+  /* ---- LISTS ---- */
+  ul, ol { margin: 8px 0 12px 20px; }
+  li { margin-bottom: 4px; }
+
+  /* ---- SOURCE CITATIONS ---- */
+  .source { font-size: 8.5pt; color: #94a3b8; }
+
+  /* ---- PAGE BREAKS ---- */
+  .page-break { page-break-before: always; }
+  .keep-together { page-break-inside: avoid; }
+
+  /* ---- FOOTER ---- */
+  .doc-footer {
+    margin-top: 32px;
+    padding-top: 12px;
+    border-top: 1px solid #e2e8f0;
+    font-size: 8.5pt;
+    color: #94a3b8;
+    line-height: 1.6;
+  }
+  .doc-footer strong { color: #64748b; }
+
+  /* ---- TOS ---- */
+  .tos {
+    font-size: 8.5pt;
+    color: #64748b;
+    line-height: 1.5;
+  }
+  .tos li { margin-bottom: 3px; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- COVER PAGE                                                     -->
+<!-- ============================================================ -->
+<div class="cover">
+  <div class="cover-brand">
+    <div class="cover-logo">G</div>
+    <div class="cover-brand-name">GovInsights</div>
+  </div>
+  <div class="cover-line"></div>
+  <h1>The School Debt Timeline</h1>
+  <p class="cover-subtitle">
+    How Chowan County built an $85 Million high school after voters voted No on an earlier referendum<br><br>
+    How decisions about a new high school connect to your property taxes.<br>
+    An analysis of public minutes and documents from the<br>
+    Chowan County Board of Commissioners.
+  </p>
+  <div class="cover-meta">
+    <strong>Location:</strong> Chowan County, North Carolina<br>
+    <strong>Period Analyzed:</strong> November 2018 to March 2026<br>
+    <strong>Documents Reviewed:</strong> 480 BOC minutes and agenda packets<br>
+    <strong>Prepared by:</strong> Ropewalk Technologies LLC<br>
+    <strong>Published:</strong> April 2026<br>
+    <br>
+    All quotes are verbatim from official Chowan County Board of Commissioner meeting minutes.<br>
+    All minutes are publicly available at chowancounty-nc.gov.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SUMMARY                                                        -->
+<!-- ============================================================ -->
+<div class="page-header">
+  <div class="page-header-logo">
+    <span class="page-header-icon">G</span>
+    <span class="page-header-text">GovInsights</span>
+  </div>
+  <span>The School Debt Timeline, Chowan County, NC</span>
+</div>
+
+<h2>Summary</h2>
+
+<div class="summary-box">
+  <p>Among the most expensive high schools per student ever built in rural America, John A. Holmes High School cost $153,430 per student for 554 students. This is 2.5 to 7.5 times the national typical range of $20,000 to $60,000 per student for suburban school construction.</p>
+  <p>When your property tax bill arrives, it can be hard to understand why it changed. The decisions that determine your taxes are spread across years of board meetings, budget votes, and financing agreements. Each one may seem routine on its own, but together they form a chain that directly affects what you pay.</p>
+  <p>This report traces that chain for Chowan County. It follows the sequence of decisions surrounding this new high school, from the 2018 bond referendum through the 2026 property reappraisal, using the county's own meeting minutes and budget documents. These decisions may appear unconnected, but they are directly linked when it comes to how much debt the county carries and how that debt is paid for through your property taxes.</p>
+  <p>The goal is clarity. County budgets are complex, and most residents do not have time to read seven years of board minutes. This analysis does that work and presents the documented sequence so that citizens can ask informed questions at budget hearings and understand what is driving changes to their tax bills.</p>
+  <p class="premise">Informed citizens make up the backbone of local governance. Access to factual information about how public resources are used produces measurably better governance outcomes. That is the entire premise of GovInsights.</p>
+</div>
+
+<h3>Detailed Findings</h3>
+
+<div class="findings-box">
+  <p>In November 2018, Chowan County voters rejected a bond referendum for a new John A. Holmes High School. Under the North Carolina Constitution, general obligation bonds require voter approval, and the voters said no.</p>
+
+  <p>A second referendum was planned for 2020 but cancelled due to COVID-19. The Board subsequently approved USDA installment financing under G.S. 160A-20, which does not require voter approval. The guidance that no referendum was needed came not from the county attorney or the Local Government Commission, but from Rick Ott of M.B. Kahn Construction, a firm that was already working on the project and receiving county payments at the time.</p>
+
+  <p>County expenditure records show that M.B. Kahn received $404,171 in eight payments from county Fund 45 between January and August 2021, before the Board of Commissioners voted on the Kahn contract on September 20, 2021. Who authorized these pre-vote payments is not documented in the 480 BOC documents reviewed for this report. Under NC G.S. §159-28, county expenditures require prior authorization. No hiring resolution, contract award, or qualifications-based selection process (as required for CMAR under G.S. 143-128.1) was found in any BOC document. Total payments to Kahn through August 2023 reached $1,407,511.</p>
+
+  <p>The project, originally scoped at $50 million with a Davenport &amp; Associates projection of "no impact on current tax rate," grew to approximately $85 million through a series of Board-approved scope and budget changes. M.B. Kahn's Construction Manager at Risk (CMAR) fee was set at 3.5% of construction cost, originally scoped on a $40 million base ($1.4 million). As costs grew, the fee grew with it. Chair Kirby confronted Kahn on record about the fee increase; Kahn's representative responded that the original commitment referred to the percentage, not the dollar amount.</p>
+
+  <p>Separately from the school project, the county has never adopted a revenue-neutral tax rate after a reappraisal. In 2022, after the first reappraisal since the school debt was approved, the Board adopted a rate 4.7% above revenue-neutral and raised the rate again in 2024. Also in 2022, the Board shortened the reappraisal cycle from 8 years to 4 years. The 2026 reappraisal, which took effect January 1, 2026, increased property values county-wide by an estimated 38-42%, with individual increases ranging from 15% to 161%.</p>
+
+  <p>Based on the Board's documented pattern of setting rates above revenue-neutral, homeowners can expect a cumulative tax increase of approximately 18-30% since FY2021-22.</p>
+</div>
+
+<p class="source">All claims sourced to official Chowan County BOC meeting minutes and agenda packets, with supporting data from the U.S. Census Bureau, NC DPI, NC DOR, and the UNC School of Government.</p>
+
+<!-- ============================================================ -->
+<!-- THE TIMELINE (key dates)                                       -->
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<div class="page-header">
+  <div class="page-header-logo">
+    <span class="page-header-icon">G</span>
+    <span class="page-header-text">GovInsights</span>
+  </div>
+  <span>The School Debt Timeline, Chowan County, NC</span>
+</div>
+
+<h2>The Documented Record</h2>
+
+<h3>2018: Voters Reject the School Bond</h3>
+<p><strong>November 2018</strong>. Chowan County voters reject a bond referendum for a new John A. Holmes High School. Under the NC Constitution (Art. V, Sec. 4), general obligation bonds require voter approval. The voters said no.</p>
+
+<h3>2019: The County Prepares to Try Again</h3>
+<p><strong>November 18, 2019</strong>. The Board approves a financial advisor (Davenport & Company, up to $30,000) and bond counsel (Parker Poe, ~$20,000) to prepare for a 2020 bond referendum.</p>
+<blockquote>
+  <p>"Commissioner McLaughlin objects that the process 'seems rushed.'"</p>
+  <span class="quote-source">Source: BOC November 18, 2019 Minutes</span>
+</blockquote>
+
+<h3>2020: COVID Cancels the Second Referendum</h3>
+<p><strong>May 4-18, 2020</strong>. The Board abandons the 2020 bond referendum due to COVID-19.</p>
+<blockquote>
+  <p>"Due to the impact of COVID 19, we would no longer pursue a bond referendum for 2020."</p>
+  <span class="quote-source">Chair Kersey, BOC May 2020 Minutes</span>
+</blockquote>
+
+<!-- FEATURED: August 26, 2020 -->
+<div class="featured keep-together">
+  <h3>August 26, 2020: The Meeting That Changed the Path</h3>
+  <p>Special meeting. Mr. Ott (M.B. Kahn), architect Paul Boney, County Manager Howard, and Superintendent Dr. Sasscer present school construction plans. All seven commissioners present.</p>
+
+  <p>At this date, a November 2022 bond referendum was still the stated plan:</p>
+
+  <blockquote>
+    <p>"He stated that the bond referendum is scheduled for November of 2022."</p>
+    <span class="quote-source">Dr. Sasscer, August_26_Minutes.pdf, lines 196-197</span>
+  </blockquote>
+
+  <p>Mr. Ott highlights the risk of the bond path, using Camden County as an example:</p>
+  <blockquote>
+    <p>"He noted that if their bond referendum does not pass, Camden County will have to return those monies to the State."</p>
+    <span class="quote-source">Mr. Ott, August_26_Minutes.pdf, line 88</span>
+  </blockquote>
+  <p class="source">Context: Ott was illustrating that the bond referendum path carried risk of voter rejection (as Chowan had already experienced in 2018). This framed USDA installment financing, which requires no voter approval, as the safer alternative.</p>
+
+  <p>Then, in the final four lines before adjournment:</p>
+  <blockquote>
+    <p>"Stated the Commissioners intention is to move forward but the time frame needs to be slid a little bit. He asked if a referendum is needed to apply for USDA loan."</p>
+    <span class="quote-source">Commissioner Kirby, August_26_Minutes.pdf, lines 201-202</span>
+  </blockquote>
+  <blockquote>
+    <p>"Stated no that is not required."</p>
+    <span class="quote-source">Mr. Ott (Construction Manager, M.B. Kahn), August_26_Minutes.pdf, line 203</span>
+  </blockquote>
+  <blockquote>
+    <p>"Noted all of this has to be approved by the LGC."</p>
+    <span class="quote-source">Commissioner Kirby, August_26_Minutes.pdf, line 204</span>
+  </blockquote>
+  <p><em>Meeting adjourned.</em></p>
+
+  <div class="note">
+    <div class="note-title">Context</div>
+    <p>No commissioner asked a follow-up question. No one asked the county attorney to verify.</p>
+    <p>The guidance that no referendum was needed came from the project's own construction contractor, not from independent legal counsel, not from the county attorney, and not from the Local Government Commission.</p>
+    <p>Under NC law (G.S. § 160A-20), installment financing such as USDA loans does not require voter approval. The legal statement was accurate. However, the source of the guidance was a party that stood to benefit from the project proceeding.</p>
+    <p>M.B. Kahn had been introduced as "the school's construction management firm" at the January 14, 2020 Joint Committee meeting, 20 months before the BOC voted on their contract.</p>
+  </div>
+</div>
+
+<!-- Page break before 2021 section -->
+<div class="page-break"></div>
+<div class="page-header">
+  <div class="page-header-logo">
+    <span class="page-header-icon">G</span>
+    <span class="page-header-text">GovInsights</span>
+  </div>
+  <span>The School Debt Timeline, Chowan County, NC</span>
+</div>
+
+<h3>2021: USDA Financing Approved, Kahn Payments Begin</h3>
+
+<p>Kahn was hired by the Board of Education for preconstruction and planning services prior to the BOC vote. County Fund 45 payments to Kahn began January 2021, eight months before the BOC voted on the contract in September 2021.</p>
+
+<p>The authorization for those county fund payments prior to the BOC vote is not documented in BOC records. Was there a separate BOE authorization that covered the preconstruction work? Was Fund 45 set up with BOE money transferred to the county? The records reviewed for this report do not answer this.</p>
+
+<table class="keep-together">
+  <thead><tr><th>Date</th><th>Payee</th><th style="text-align:right">Amount</th><th>Note</th></tr></thead>
+  <tbody>
+    <tr><td>1/14/2021</td><td>MB Kahn</td><td class="num">$59,063</td><td rowspan="8" style="vertical-align:middle;font-size:9pt;color:#64748b">All 8 payments made before the Sep 20, 2021 BOC vote on the Kahn contract. Authorization source not documented in BOC records.</td></tr>
+    <tr><td>1/14/2021</td><td>MB Kahn</td><td class="num">$43,019</td></tr>
+    <tr><td>2/4/2021</td><td>MB Kahn</td><td class="num">$40,298</td></tr>
+    <tr><td>3/11/2021</td><td>MB Kahn</td><td class="num">$39,696</td></tr>
+    <tr><td>4/8/2021</td><td>MB Kahn</td><td class="num">$44,153</td></tr>
+    <tr><td>5/13/2021</td><td>MB Kahn</td><td class="num">$44,293</td></tr>
+    <tr><td>6/30/2021</td><td>MB Kahn</td><td class="num">$39,450</td></tr>
+    <tr><td>8/12/2021</td><td>MB Kahn</td><td class="num">$94,199</td></tr>
+    <tr style="background:#f1f5f9;font-weight:600"><td colspan="2">Pre-vote total</td><td class="num">$404,171</td><td></td></tr>
+  </tbody>
+</table>
+<p class="source">Source: JAHHS Project Expenditures ledger, BOC August 7, 2023 Agenda Packet, lines 2519-2526</p>
+
+<p><strong>April 19, 2021</strong>. Board approves $50M school project with USDA financing, 7-0.</p>
+<blockquote>
+  <p>"The current revaluation will also allow the county to realize an increase in property values but this will also result in an increase for tax payers. He stated that the County may have to adjust the rate to meet its obligations."</p>
+  <span class="quote-source">Chair Kirby, BOC April 19, 2021 Minutes</span>
+</blockquote>
+
+<p>When Commissioner Kehayes raised concern about the debt-to-assessed-value ratio:</p>
+<blockquote>
+  <p>"He thinks this should be addressed at the revaluation."</p>
+  <span class="quote-source">County Manager Howard, BOC April 19, 2021 Minutes</span>
+</blockquote>
+
+<p><strong>August 2021</strong>. Truist offered a competitive financing rate of 2.26%.</p>
+
+<p><strong>September 20, 2021</strong>. BOC votes on Kahn contract. First formal Board vote. Approved 7-0.</p>
+<blockquote>
+  <p>"The school system did not have funds for the project when he was hired."</p>
+  <span class="quote-source">Mr. Ott, BOC September 20, 2021 Minutes, lines 171-172</span>
+</blockquote>
+
+<div class="page-break"></div>
+<div class="page-header">
+  <div class="page-header-logo">
+    <span class="page-header-icon">G</span>
+    <span class="page-header-text">GovInsights</span>
+  </div>
+  <span>The School Debt Timeline, Chowan County, NC</span>
+</div>
+
+<h3>2022: Project Grows, Reappraisal Cycle Shortened</h3>
+
+<p><strong>January 1, 2022</strong>. The 2022 reappraisal takes effect. Tax base increases 22.2% ($1.49B to $1.82B).</p>
+
+<p><strong>June 9, 2022</strong>. Special meeting on school construction. The Board approves a $75M project budget (Cummings sole dissenter). Key exchange on Kahn fees:</p>
+<blockquote>
+  <p>"Mr. Ott stated that at the time negotiating the construction manager at risk contract that the fee would not change. He stated now the fee has changed. He stated that he is concerned with the trust level that the fee would not change."</p>
+  <span class="quote-source">Chair Kirby, BOC June 9, 2022 Special 9am Meeting Minutes</span>
+</blockquote>
+<blockquote>
+  <p>"Mr. Ott was referring to the fee percentage not absolute dollar cash cost."</p>
+  <span class="quote-source">Mr. Cram (M.B. Kahn), same meeting</span>
+</blockquote>
+
+<p><strong>June 9, 2022</strong>. Board sets tax rate. Revenue-neutral rate: $0.635. County Manager Howard proposed $0.73. Board adopted $0.665, using $1.15M from fund balance. Howard advises:</p>
+<blockquote>
+  <p>"If they spend fund balance in the next fiscal year, these monies will have to be located in the budget next fiscal year."</p>
+  <span class="quote-source">County Manager Howard, BOC June 9, 2022 Minutes</span>
+</blockquote>
+
+<p><strong>August 15, 2022</strong>. Board votes 7-0 to shorten reappraisal cycle from 8 years to 4 years. No public hearing held on the cycle change.</p>
+<blockquote>
+  <p>"By doing this would benefit taxpayers as the valuation would better follow the market and reduce sticker shock."</p>
+  <span class="quote-source">Tax Administrator Melissa Radke, BOC August 15, 2022 Minutes</span>
+</blockquote>
+<p class="source">This cycle change was adopted 5 months after the 2022 reappraisal and 14 months after the USDA loan. The Board's discussion contains no reference to school debt, the USDA loan, or revenue needs.</p>
+
+<h3>2023: GMP Approved, PNC Financing</h3>
+
+<p><strong>February 6, 2023</strong>. Vincent Valuations contracted for 2026 reappraisal ($364,687). McLaughlin recused. Lawrence voted yes despite owning 47 parcels subject to the reappraisal.</p>
+
+<p><strong>September 5, 2023</strong>. Board approves $82.4M Guaranteed Maximum Price (GMP). Chair Kirby discloses his brother's company received a subcontract on the project. Kirby voted yes.</p>
+
+<p><strong>November 20, 2023</strong>. PNC Bank financing: $34,998,500 at a 9% rate floor. No competitive solicitation documented. In August 2021, Truist had offered a competitive rate of 2.26%. The PNC rate floor of 9% represents a significantly higher cost of financing. No competitive solicitation for the PNC financing is documented.</p>
+
+<h3>2024-2025: Rate Climbs, Fund Balance Drawn</h3>
+
+<p><strong>June 2024</strong>. Tax rate raised to $0.695. School project now at approximately $85M.</p>
+<p><strong>June 2025</strong>. Board uses $670K in Timbermill wind farm revenue and additional fund balance to avoid another rate increase. Howard's 2022 advisement about fund balance spending has materialized.</p>
+
+<h3>2026: The Reappraisal Arrives</h3>
+
+<p><strong>September 15, 2025</strong>. 2026 reappraisal presented. Increases range from 15% to 161%.</p>
+<blockquote>
+  <p>"The market will cause those who live on a fixed income and are not buying or selling to be priced out of their homes."</p>
+  <span class="quote-source">Commissioner Cummings, BOC September 15, 2025 Minutes</span>
+</blockquote>
+
+<p><strong>October 20, 2025</strong>. Schedule of Values adopted. Zero public comments. Passed 6-0.</p>
+<p><strong>January 1, 2026</strong>. Reappraisal takes effect. County-wide increase estimated at 38-42%.</p>
+
+<!-- ============================================================ -->
+<!-- BY THE NUMBERS                                                 -->
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<div class="page-header">
+  <div class="page-header-logo">
+    <span class="page-header-icon">G</span>
+    <span class="page-header-text">GovInsights</span>
+  </div>
+  <span>The School Debt Timeline, Chowan County, NC</span>
+</div>
+
+<h2>By the Numbers</h2>
+
+<table>
+  <thead><tr><th>What Changed</th><th>Before (2021)</th><th>After</th></tr></thead>
+  <tbody>
+    <tr><td>School project cost</td><td>$50 million (approved Apr 2021)</td><td>~$85 million (reported cost)</td></tr>
+    <tr><td>Voter approval?</td><td>Yes (bond, rejected 2018)</td><td>No (USDA installment)</td></tr>
+    <tr><td>County debt (pre-Holmes)</td><td>$7M (retiring by 2025)</td><td>Retired</td></tr>
+    <tr><td>Holmes HS debt (new)</td><td>$50M (approved)</td><td>~$85M (reported)</td></tr>
+    <tr><td>Holmes HS annual debt service (estimated)</td><td>~$2M/yr (Davenport projection at $50M)</td><td>~$3.4 million/year (estimated)</td></tr>
+    <tr><td>School debt as % of property tax levy (estimated)</td><td>~17.9%</td><td>~24.3%</td></tr>
+    <tr><td>Tax rate</td><td>$0.755 (FY2021-22)</td><td>$0.695 (FY2025-26)</td></tr>
+    <tr><td>Tax base</td><td>$1.49 billion</td><td>$2.00 billion</td></tr>
+    <tr><td>Property tax revenue</td><td>~$11.2M</td><td>~$14.0M (+25%)</td></tr>
+    <tr><td>Fund balance</td><td>27.53% (2022)</td><td>29.50% (Finance Officer, Feb 2026) / 58.13% (audit)</td></tr>
+    <tr><td>Reappraisal cycle</td><td>8 years</td><td>4 years</td></tr>
+  </tbody>
+</table>
+
+<p class="table-note"><strong>How "School debt as % of property tax levy" is calculated:</strong> The estimated annual debt service payment is divided by the total property tax revenue for that period. At the $50M project level, Davenport projected approximately $2M per year in debt service; the property tax levy at that time was approximately $11.2M, producing $2M / $11.2M = 17.9%. At the reported $85M project level, estimated debt service is approximately $3.4M per year; the current property tax levy is approximately $14M, producing $3.4M / $14M = 24.3%. Both figures represent the school debt service portion only, not total school funding (which includes operational expenses). These are estimates based on publicly available data; the actual debt service schedule has not been made publicly available.</p>
+
+<h2>M.B. Kahn Fee &amp; Project Cost Changes</h2>
+
+<table>
+  <thead><tr><th>Metric</th><th>Original Scope</th><th>As Costs Grew</th></tr></thead>
+  <tbody>
+    <tr><td>Construction cost base</td><td class="num">$40,000,000</td><td class="num">$64,744,592</td></tr>
+    <tr><td>CMAR fee (3.5%)</td><td class="num">$1,400,000</td><td class="num">$2,266,061</td></tr>
+    <tr><td>LS3P architect fee (5.75%)</td><td class="num">$2,300,000</td><td class="num">$3,722,814</td></tr>
+    <tr><td>Total project budget</td><td class="num">$50,000,000</td><td class="num">$75,000,000 to ~$85,000,000</td></tr>
+    <tr><td>Total Kahn payments (through Aug 2023)</td><td colspan="2" class="num">$1,407,511</td></tr>
+  </tbody>
+</table>
+<p class="source">Sources: BOC June 9, 2022 Special Meeting Minutes; JAHHS Project Expenditures, BOC Aug 7, 2023 Agenda Packet</p>
+
+<h2>Where Did the Guidance Come From?</h2>
+
+<table class="guidance-table">
+  <thead><tr><th>Decision</th><th>Guidance Source</th><th>What They Said</th><th>Their Interest</th></tr></thead>
+  <tbody>
+    <tr><td>No referendum needed</td><td>Rick Ott, M.B. Kahn (contractor)</td><td>"No that is not required"</td><td>Kahn was hired to build the school</td></tr>
+    <tr><td>"No impact on tax rate"</td><td>Davenport &amp; Associates (advisor)</td><td>Based on $50M project</td><td>Paid up to $30K for the engagement</td></tr>
+    <tr><td>"Reduce sticker shock"</td><td>Tax Administrator Melissa Radke</td><td>"Benefit taxpayers"</td><td>Presented after USDA loan approved</td></tr>
+    <tr><td>Values are accurate</td><td>Vincent Valuations (contractor)</td><td>Median 99.04%</td><td>Paid $378K (2022) and $365K (2026)</td></tr>
+  </tbody>
+</table>
+
+<!-- ============================================================ -->
+<!-- TAX IMPACT                                                     -->
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<div class="page-header">
+  <div class="page-header-logo">
+    <span class="page-header-icon">G</span>
+    <span class="page-header-text">GovInsights</span>
+  </div>
+  <span>The School Debt Timeline, Chowan County, NC</span>
+</div>
+
+<h2>What the Reappraisal Means for Your Tax Rate</h2>
+
+<h3>What Has Already Happened to Your Tax Bill</h3>
+<p>Example: a home assessed at $200,000 before the 2022 reappraisal.</p>
+
+<table>
+  <thead><tr><th>Year</th><th style="text-align:right">Assessed Value</th><th style="text-align:right">Tax Rate</th><th style="text-align:right">Annual Bill</th><th style="text-align:right">Change from FY2021-22</th></tr></thead>
+  <tbody>
+    <tr><td>FY2021-22 (before reappraisal)</td><td class="num">$200,000</td><td class="num">$0.755</td><td class="num">$1,510</td><td class="num">n/a</td></tr>
+    <tr><td>FY2022-23 (after 2022 reappraisal)</td><td class="num">$244,400</td><td class="num">$0.665</td><td class="num">$1,625</td><td class="num">+$115 (+7.6%)</td></tr>
+    <tr><td>FY2024-25 (rate increase)</td><td class="num">$244,400</td><td class="num">$0.695</td><td class="num">$1,699</td><td class="num">+$189 (+12.5%)</td></tr>
+  </tbody>
+</table>
+<p>Your bill has already increased 12.5% since FY2021-22, even though the rate dropped from $0.755 to $0.695.</p>
+
+<h3>2026 Scenarios Based on Board's Documented Pattern</h3>
+<p>The same home after the 2026 reappraisal (est. 40% increase, new value ~$342,000):</p>
+
+<table>
+  <thead><tr><th>Scenario</th><th style="text-align:right">Rate</th><th style="text-align:right">Annual Bill</th><th style="text-align:right">Change from Today</th><th style="text-align:right">Cumulative since FY2021-22</th></tr></thead>
+  <tbody>
+    <tr><td>Revenue-neutral (RNR)</td><td class="num">~$0.498</td><td class="num">~$1,704</td><td class="num">+$5 (+0%)</td><td class="num">+$194 (+13%)</td></tr>
+    <tr><td>Board pattern: 5% above RNR</td><td class="num">~$0.523</td><td class="num">~$1,789</td><td class="num">+$91 (+5%)</td><td class="num">+$279 (+18%)</td></tr>
+    <tr class="highlight-row"><td>Board pattern: 10% above RNR <span class="likely-badge">LIKELY</span></td><td class="num">~$0.548</td><td class="num">~$1,874</td><td class="num">+$176 (+10%)</td><td class="num">+$364 (+24%)</td></tr>
+    <tr><td>Manager pattern: 15% above RNR</td><td class="num">~$0.573</td><td class="num">~$1,960</td><td class="num">+$261 (+15%)</td><td class="num">+$450 (+30%)</td></tr>
+  </tbody>
+</table>
+<p class="table-note">Scenarios based on documented Board behavior. In 2022, the Board adopted 4.7% above RNR ($0.665 vs $0.635 RNR). The County Manager proposed 15% above. The Board has never adopted a revenue-neutral rate after a reappraisal.</p>
+
+<!-- Page break before comparison section -->
+<div class="page-break"></div>
+<div class="page-header">
+  <div class="page-header-logo">
+    <span class="page-header-icon">G</span>
+    <span class="page-header-text">GovInsights</span>
+  </div>
+  <span>The School Debt Timeline, Chowan County, NC</span>
+</div>
+
+<h3>How Does This Compare to Other NC Counties?</h3>
+<p>A 2024 UNC School of Government study of 200 reappraisals across all 100 NC counties (2008-2023) found:</p>
+<ul>
+  <li><strong>67%</strong> of NC counties adopted rates above revenue-neutral after reappraisals.</li>
+  <li>When tax bases grew, <strong>92%</strong> adopted above revenue-neutral, averaging 6% above.</li>
+  <li>Chowan County adopted 4.7% above revenue-neutral in 2022.</li>
+  <li>County Manager Howard confirmed in April 2019 that the Board chose not to go revenue-neutral after the 2014 reappraisal.</li>
+</ul>
+<p><strong>Chowan County has never adopted a revenue-neutral rate after a reappraisal</strong>, based on the documented record.</p>
+<p class="source">Sources: UNC School of Government, McLaughlin (2024); BOC April 17, 2019 Minutes.</p>
+
+<!-- ============================================================ -->
+<!-- WHAT YOU CAN DO                                                -->
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<div class="page-header">
+  <div class="page-header-logo">
+    <span class="page-header-icon">G</span>
+    <span class="page-header-text">GovInsights</span>
+  </div>
+  <span>The School Debt Timeline, Chowan County, NC</span>
+</div>
+
+<h2>What You Can Do</h2>
+
+<h3>Before May 11, 2026: If Your Assessment Contains Errors</h3>
+<ul>
+  <li>Review your assessment notice for data errors (square footage, year built, bedrooms, lot size)</li>
+  <li>File an appeal with the Board of Equalization and Review if evidence supports a lower value</li>
+  <li>Bring: comparable sales data, a private appraisal, photos, or error documentation</li>
+  <li>You do not need an attorney</li>
+</ul>
+
+<h3>Before the Budget Hearing (May/June 2026): This Is Where the Rate Is Set</h3>
+<ul>
+  <li>Ask the county to publish the revenue-neutral tax rate before the hearing</li>
+  <li>Attend the budget hearing and speak during public comment</li>
+  <li>Ask: How much of the tax rate goes to school debt service?</li>
+  <li>Ask: What would the rate be without the school debt?</li>
+  <li>Ask: Was the Davenport financial analysis updated when the project cost increased from $50M to $85M?</li>
+</ul>
+
+<div class="note">
+  <div class="note-title">Note</div>
+  Zero public comments were received at both the 2022 and 2026 Schedule of Values hearings. The budget hearing should not be zero again.
+</div>
+
+<h3>Tax Relief Programs</h3>
+<p>If you are 65+, disabled, or on a fixed income, NC law provides programs that may reduce your tax bill:</p>
+<ul>
+  <li><strong>Elderly/Disabled Exclusion</strong> (G.S. § 105-277.1)</li>
+  <li><strong>Circuit Breaker</strong> (G.S. § 105-277.1B)</li>
+  <li><strong>Tax Deferral</strong> (G.S. § 105-277.1C)</li>
+</ul>
+<p>Visit <strong>chowancounty-nc.gov</strong> for contact information.</p>
+
+<!-- ============================================================ -->
+<!-- SCOPE OF REVIEW                                                -->
+<!-- ============================================================ -->
+<h2>Scope of Review</h2>
+
+<h3>What Was Reviewed</h3>
+<ul>
+  <li><strong>480 documents</strong> from the Chowan County Board of Commissioners (meeting minutes, agenda packets, retreat minutes, special meeting minutes, CIP Committee minutes, Joint Committee minutes)</li>
+  <li><strong>Coverage:</strong> 2019 through March 2026</li>
+  <li><strong>Source:</strong> All documents downloaded from chowancounty-nc.gov</li>
+  <li><strong>Verification:</strong> Every document SHA-256 hashed at acquisition. Full hash log available upon request.</li>
+  <li><strong>Completeness:</strong> Verified against county website April 2, 2026. Collection is complete relative to what the county has made publicly available.</li>
+</ul>
+
+<h3>Records Needed to Complete This Analysis</h3>
+
+<div class="foia-item">
+  <p><strong>Board of Education meeting minutes</strong>. The BOE is a separate body. BOC minutes reference that Kahn was presented as a "request from Edenton-Chowan Board of Education." The BOE minutes may contain the Kahn hiring authorization.</p>
+  <p class="foia-target">Needed from: Edenton-Chowan Board of Education</p>
+</div>
+<div class="foia-item">
+  <p><strong>M.B. Kahn CMAR contract</strong>. The executed agreement including fee schedule, scope, amendments, and change orders.</p>
+  <p class="foia-target">Needed from: Chowan County Manager's Office</p>
+</div>
+<div class="foia-item">
+  <p><strong>Kahn qualifications-based selection records</strong>. Under G.S. 143-128.1, CMAR uses qualifications-based selection. No RFQ, selection committee records, or evaluation summaries were found in any BOC document.</p>
+  <p class="foia-target">Needed from: Chowan County Manager's Office and/or Board of Education</p>
+</div>
+<div class="foia-item">
+  <p><strong>USDA loan agreement and amortization schedule</strong>. The executed loan terms. Did USDA approve the cost increases from $50M to $85M?</p>
+  <p class="foia-target">Needed from: Chowan County Manager's Office / USDA Rural Development</p>
+</div>
+<div class="foia-item">
+  <p><strong>Davenport &amp; Associates updated financial projections</strong>. The original projection was "no impact on current tax rate" at $50M. Was this updated when costs reached $85M?</p>
+  <p class="foia-target">Needed from: Chowan County Manager's Office</p>
+</div>
+<div class="foia-item">
+  <p><strong>PNC Bank financing selection records</strong>. PNC financing was $34.9M at a 9% floor. Truist offered 2.26% in 2021. No competitive quotes documented.</p>
+  <p class="foia-target">Needed from: Chowan County Manager's Office</p>
+</div>
+
+<h3>Note on County Audits</h3>
+<p>The county's annual financial audit verifies that dollar amounts are correctly recorded. It does not audit processes or programs. The procedural questions raised in this report are outside the scope of a financial statement audit.</p>
+
+<!-- ============================================================ -->
+<!-- APPENDIX                                                       -->
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<div class="page-header">
+  <div class="page-header-logo">
+    <span class="page-header-icon">G</span>
+    <span class="page-header-text">GovInsights</span>
+  </div>
+  <span>The School Debt Timeline, Chowan County, NC</span>
+</div>
+
+<h2>Appendix: Key Figures Referenced in This Report</h2>
+
+<table>
+  <thead><tr><th>Name</th><th>Role</th><th>Relevance to This Report</th></tr></thead>
+  <tbody>
+    <tr><td>Patti Kersey</td><td>BOC Chair (2019-2020)</td><td>Presided over referendum cancellation and early USDA discussions</td></tr>
+    <tr><td>Bob Kirby</td><td>Commissioner, then Chair (2021-present)</td><td>Asked if referendum needed; linked revaluation to debt capacity; confronted Kahn on fee increase</td></tr>
+    <tr><td>Kevin Howard</td><td>County Manager</td><td>Proposed budgets; advised about fund balance; stated debt ratio would be "addressed at the revaluation"</td></tr>
+    <tr><td>Rick Ott</td><td>Construction Manager, M.B. Kahn</td><td>Advised Board no referendum needed for USDA. Present from Jan 2020, 20 months before contract vote.</td></tr>
+    <tr><td>Mr. Cram</td><td>M.B. Kahn representative</td><td>Distinguished fee percentage from dollar amount in response to Kirby's confrontation</td></tr>
+    <tr><td>Ron Cummings</td><td>Commissioner</td><td>Sole consistent dissenter on cost increases; raised concern about fixed-income residents</td></tr>
+    <tr><td>Larry McLaughlin</td><td>Commissioner</td><td>Objected 2019 bond process "seems rushed"; recused on Vincent contract</td></tr>
+    <tr><td>Commissioner Kehayes</td><td>Commissioner</td><td>Raised concern about debt-to-assessed-value ratio</td></tr>
+    <tr><td>Ryan Vincent</td><td>Owner, Vincent Valuations</td><td>Conducted 2022 and 2026 reappraisals</td></tr>
+    <tr><td>Dr. Sasscer</td><td>Superintendent</td><td>Confirmed referendum timeline; proposed capping Kahn fee at $50M base</td></tr>
+    <tr><td>Chris Hill</td><td>Tax Administrator</td><td>Presented reappraisal data</td></tr>
+    <tr><td>Cathy Smith</td><td>Finance Officer</td><td>Presented budget and financial data</td></tr>
+    <tr><td>Melissa Radke</td><td>Former Tax Administrator</td><td>Presented resolution to shorten reappraisal cycle</td></tr>
+    <tr><td>Davenport &amp; Associates</td><td>County's financial advisor</td><td>Projected "no impact on current tax rate" for $50M project</td></tr>
+  </tbody>
+</table>
+
+<!-- ============================================================ -->
+<!-- TOS + FOOTER                                                   -->
+<!-- ============================================================ -->
+<h2>Terms of Use</h2>
+<div class="tos">
+  <ul>
+    <li>This analysis is produced from public records and is provided for informational purposes only.</li>
+    <li>It does not constitute legal, financial, or tax advice.</li>
+    <li>Information is provided "as is" without warranty of any kind.</li>
+    <li>If any information is found to be inaccurate, it will be updated to match official records upon notification.</li>
+    <li>This is a product of the written public record, simplified for citizen accessibility.</li>
+  </ul>
+</div>
+
+<div class="doc-footer">
+  <p><strong>GovInsights</strong> is a project of Ropewalk Technologies LLC.</p>
+  <p>All data sourced from official Chowan County Board of Commissioner meeting minutes and agenda packets, with supporting data from the U.S. Census Bureau, NC Department of Public Instruction, NC Department of Revenue, UNC School of Government, and NC General Statutes.</p>
+  <p>This document was prepared with the assistance of AI for data compilation and formatting. All factual claims are sourced to government records.</p>
+  <p>Contact: govinsights.io/contact</p>
+</div>
+
+</body>
+</html>
